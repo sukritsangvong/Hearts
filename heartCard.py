@@ -81,7 +81,6 @@ def main():
     print("Player 4 : ", p4.getHand())
     print("-----------")
     print("list of deck:", deck)
-    print("test for git push")
 
 if __name__ == "__main__":
     main()
