@@ -69,18 +69,38 @@ def main():
     p2.reciveHand(assignHand(deck, 13))
     p3.reciveHand(assignHand(deck, 13))
     p4.reciveHand(assignHand(deck, 13))
+    
+    
+    listHearts = []
+    listClubs = []
+    listSpades = []
+    listDiamonds = []
+    for eachCard in p1.getHand():
 
+        if eachCard[5:] == 'hearts':
+            listHearts.append(eachCard)
 
-    #test
-    print("Player 1 : ", p1.getHand())
-    print("-----------")
-    print("Player 2 : ", p2.getHand())
-    print("-----------")
-    print("Player 3 : ", p3.getHand())
-    print("-----------")
-    print("Player 4 : ", p4.getHand())
-    print("-----------")
-    print("list of deck:", deck)
+        if eachCard[5:] == 'clubs':
+            listClubs.append(eachCard)
+
+        if eachCard[5:] == 'spades':
+            listSpades.append(eachCard)
+
+        if eachCard[5:] == 'diamonds':
+            listDiamonds.append(eachCard)
+
+    print(listHearts)
+
+#    #test
+#    print("Player 1 : ", p1.getHand())
+#    print("-----------")
+#    print("Player 2 : ", p2.getHand())
+#    print("-----------")
+#    print("Player 3 : ", p3.getHand())
+#    print("-----------")
+#    print("Player 4 : ", p4.getHand())
+#    print("-----------")
+#    print("list of deck:", deck)
 
 if __name__ == "__main__":
     main()
