@@ -9,9 +9,9 @@ class player:
         self.hand = cards
         return self.hand
     
-    def addHand(self, card):
-        self.hand.append(card)
-        return self.hand
+    #def addHand(self, card):
+        #self.hand.append(card)
+        #return self.hand
 
     def getHand(self):
         return self.hand
@@ -24,8 +24,8 @@ def createDeck():
     for suits in ['clubs', "diamonds", "hearts", "spades"]:
         for num in ['2', '3','4', '5', '6', '7', '8', '9','10',\
                    'J', 'Q', 'K', 'A']:
-            cardAdded = [num, "of",  suits]
-            cardAdded = ' '.join(cardAdded)
+            cardAdded = [num, suits]
+            #cardAdded = ' '.join(cardAdded)
             deck.append(cardAdded)
 
     return deck
