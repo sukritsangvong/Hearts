@@ -1,17 +1,24 @@
 import random 
 
+def generatePlayers():
+    players = []
+    for i in range(4):
+        players.append(player())
+    return players
+        
+    
 class player:
 
     def __init__(self):
         self.hand = []
 
-    def reciveHand(self, cards):
+    def recieveHand(self, cards):
         self.hand = cards
         return self.hand
     
-    #def addHand(self, card):
-        #self.hand.append(card)
-        #return self.hand
+    def addHand(self, card):
+        self.hand.append(card)
+        return self.hand
 
     def getHand(self):
         return self.hand
@@ -32,7 +39,7 @@ def createDeck():
 
 
 
-def assignHand(deck, numberofCards):
+def assignHand(self, deck, numberofCards):
 
     listofCards = []
     
@@ -47,7 +54,7 @@ def assignHand(deck, numberofCards):
                 deck.remove(identical)
 
         #adding card to the hand of self(class)
-        listofCards.append(card)
+        self.addHand(card)
 
 
     return listofCards
@@ -56,29 +63,30 @@ def assignHand(deck, numberofCards):
 def main():
     
     #craete class of players
-    p1 = player()
-    p2 = player()
-    p3 = player()
-    p4 = player()
+    #p1 = players[1]
+    #p2 = players[2]
+    #p3 = players[3]
+    #p4 = players[4]
     
-    #activate createDeck function
+    #generate deck
     deck = createDeck()
-    
-    #hand out the starting cards --> mutate the list of cards
-    p1.reciveHand(assignHand(deck, 13))
-    p2.reciveHand(assignHand(deck, 13))
-    p3.reciveHand(assignHand(deck, 13))
-    p4.reciveHand(assignHand(deck, 13))
-    
-    
-    listHearts = []
-    listClubs = []
-    listSpades = []
-    listDiamonds = []
-    for eachCard in p1.getHand():
 
-        if eachCard[5:] == 'hearts':
-            listHearts.append(eachCard)
+    #generate players
+    players = generatePlayers()
+    print(players)
+
+    #hand out the starting cards --> mutate the list of cards
+    for i in range(4):
+        assignHand(players[i],deck, 13)
+    
+    '''#listHearts = []
+    #listClubs = []
+    #listSpades = []
+    #listDiamonds = []
+    #for eachCard in p1.getHand():
+
+        #if eachCard[5:] == 'hearts':
+            #listHearts.append(eachCard)
 
         if eachCard[5:] == 'clubs':
             listClubs.append(eachCard)
@@ -89,18 +97,20 @@ def main():
         if eachCard[5:] == 'diamonds':
             listDiamonds.append(eachCard)
 
-    print(listHearts)
+    print(listHearts)'''
 
-#    #test
-#    print("Player 1 : ", p1.getHand())
-#    print("-----------")
-#    print("Player 2 : ", p2.getHand())
-#    print("-----------")
-#    print("Player 3 : ", p3.getHand())
-#    print("-----------")
-#    print("Player 4 : ", p4.getHand())
-#    print("-----------")
-#    print("list of deck:", deck)
+    
+
+    
+    print("Player 1 : ", players[0].getHand())
+    print("-----------")
+    print("Player 2 : ", players[1].getHand())
+    print("-----------")
+    print("Player 3 : ", players[2].getHand())
+    print("-----------")
+    print("Player 4 : ", players[3].getHand())
+    print("-----------")
+    print("list of deck:", deck)
 
 if __name__ == "__main__":
     main()
