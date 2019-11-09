@@ -16,9 +16,9 @@ class player:
         self.hand = cards
         return self.hand
     
-    def addHand(self, card):
+    #def addHand(self, card):
         self.hand.append(card)
-        return self.hand
+        #return self.hand
 
     def getHand(self):
         return self.hand
@@ -41,7 +41,8 @@ def createDeck():
 
 def assignHand(self, deck, numberofCards):
 
-    listofCards = []
+    currentHand = self.getHand()
+    
     
     for individualHands in range(numberofCards):
         
@@ -49,15 +50,15 @@ def assignHand(self, deck, numberofCards):
         card = random.choice(deck)
 
         #remove chosen card from the deck
-        for identical in deck:
+        '''for identical in deck:
             if identical == card:
-                deck.remove(identical)
+                deck.remove(identical)'''
+        deck.remove(card)
 
-        #adding card to the hand of self(class)
-        self.addHand(card)
-
-
-    return listofCards
+        #add cards to hand
+        currentHand.append(card)
+        
+    return currentHand
 
       
 def main():
