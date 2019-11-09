@@ -1,5 +1,6 @@
 from heartCard import *
 
+# might make this function to make code look a bit shorter later
 #def askForCard(handWithSameSuit):
 #
 #    checkPlayCard = "not match"
