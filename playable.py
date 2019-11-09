@@ -26,9 +26,10 @@ def playable(players, numPlayer, identifyCard):
     identifysuit = identifyCard[1]
     
    
+   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #for testing before having organized list
     turnHand = [[['8', 'hearts'],['9', 'hearts']],[['2', 'clubs'],['5', 'clubs'],['10', 'clubs'],['J', 'clubs']],[['4', 'diamonds'], ['K', 'diamonds']], []]
-
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     #identify which suit can be played
     if identifysuit == "hearts":
@@ -63,6 +64,7 @@ def playable(players, numPlayer, identifyCard):
 
 #--------------------------------choose card to play part----------------------------
     checkPlayCard = "not match"
+
     chosenCard = ''
 
     while checkPlayCard != "match":
@@ -74,7 +76,7 @@ def playable(players, numPlayer, identifyCard):
         else:
             playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
             for checkCard in handWithSameSuit:
-                if checkCard[1] == suitOfPlayCard and checkCard[0] == playCard:
+                if checkCard[0] == playCard:
                     checkPlayCard = "match"
                     chosenCard = checkCard
                 if checkPlayCard != "match":
@@ -84,7 +86,8 @@ def playable(players, numPlayer, identifyCard):
 
         playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
         for checkCard in handWithSameSuit:
-            if checkCard[0] == playCard:
+            if checkCard[1][0] == suitOfPlayCard and checkCard[0] == playCard:
+                print("entered")
                 checkPlayCard = "match"
                 chosenCard = checkCard
         if checkPlayCard != "match":
@@ -92,15 +95,14 @@ def playable(players, numPlayer, identifyCard):
 
 
     #remove played card from hand
+    count = 0
     for listOfSuits in turnHand:
         if chosenCard in listOfSuits:
             listOfSuits.remove(chosenCard)
 
+    turnHand.remove([]) #the function turnHand somehow has empty list in it, so remove it before returning
 
-
-#    newHand = turnHand.remove(chosenCard)
-
-    return chosenCard
+    return chosenCard, turnHand
 
 
 
