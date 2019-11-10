@@ -11,17 +11,25 @@ class player:
 
     def __init__(self):
         self.hand = []
+        self.graveyard = []
 
     def recieveHand(self, cards):
         self.hand = cards
         return self.hand
     
     #def addHand(self, card):
-        self.hand.append(card)
+    #self.hand.append(card)
         #return self.hand
 
     def getHand(self):
         return self.hand
+
+    def getGraveyard(self):
+        return self.graveyard()
+
+    def addGraveyard(self, listOfCollecetedCards):
+        self.graveyard += listOfCollecetedCards
+        return self.graveyard()
     
 
 def createDeck():

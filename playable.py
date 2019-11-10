@@ -101,7 +101,7 @@ def playable(players, numPlayer, identifyCard):
         if chosenCard in listOfSuits:
             listOfSuits.remove(chosenCard)
 
-    turnHand.remove([]) #the function turnHand somehow has empty list in it, so remove it before returning
+    turnHand.remove([]) #the function turnHand somehow has empty list in it, this line removes it before returning
 
     return chosenCard, turnHand
 

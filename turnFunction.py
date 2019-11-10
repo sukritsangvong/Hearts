@@ -13,3 +13,4 @@ def turn(listofhands):
         #then this player will play the 3 of clubs
         
     
+#Note: need to add graveyard list after identifing who is taking the cards
