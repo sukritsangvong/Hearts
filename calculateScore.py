@@ -10,7 +10,7 @@ def calculateScore(listOfGraveyard):
             QofSpades = True
 
     points = int(len(pointList)/2) #the len of pointList counts 2 points per card
-                                    #(len['8', 'hearts') = 2
+                                    #(len['8', 'hearts']) = 2
     if QofSpades:
         points += 13
 
