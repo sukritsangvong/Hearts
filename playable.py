@@ -1,20 +1,27 @@
 from heartCard import *
 
 # might make this function to make code look a bit shorter later
-#def askForCard(handWithSameSuit):
-#
-#    checkPlayCard = "not match"
-#    chosenCard = ''
-#
-#    playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
-#    for checkCard in handWithSameSuit:
-#        if checkCard[0] == playCard:
-#            checkPlayCard = "match"
-#            chosenCard = checkCard
-#        if checkPlayCard != "match":
-#            print("Found no matched card \nTry Again!")
-#
-#    return chosenCard
+def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
+
+    for checkCard in handWithSameSuit:
+        
+        if suitOrNot:
+            if checkCard[1][0] == suitOfPlayCard and checkCard[0] == playCard:
+                checkPlayCard = "match"
+                chosenCard = checkCard
+                return chosenCard, checkPlayCard
+        
+        else:
+            if checkCard[0] == playCard:
+                checkPlayCard = "match"
+                chosenCard = checkCard
+                return chosenCard, checkPlayCard
+
+    checkPlayCard = "not match"
+    chosenCard = ''
+    return chosenCard, checkPlayCard
+    
+
 
 def playable(players, numPlayer, identifyCard):
     #players = list of class of players
@@ -24,13 +31,20 @@ def playable(players, numPlayer, identifyCard):
 #    print(players[numPlayer].getHand()[1][1][0])
 
     turnHand = players[numPlayer].getHand()
-    identifysuit = identifyCard[1]
-    
-   
-   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #for testing before having organized list
     turnHand = [[['8', 'hearts'],['9', 'hearts']],[['2', 'clubs'],['5', 'clubs'],['10', 'clubs'],['J', 'clubs']],[['4', 'diamonds'], ['K', 'diamonds']], []]
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    noMatchingSuit = False
+    identifysuit = ''
+    
+    if identifyCard == 'no card yet':
+        handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
+        noMatchingSuit = True
+    
+    else:
+        identifysuit = identifyCard[1]
     
     #identify which suit can be played
     if identifysuit == "hearts":
@@ -46,7 +60,7 @@ def playable(players, numPlayer, identifyCard):
         handWithSameSuit = turnHand[3]
 
 
-    noMatchingSuit = False
+
 
     #if no cards on hand match the suit on the board
     if handWithSameSuit == []:
@@ -71,28 +85,32 @@ def playable(players, numPlayer, identifyCard):
     while checkPlayCard != "match":
         
         if noMatchingSuit:
-            suitOfPlayCard = str(input("Type in the first letter(h,c,d,s) of suit that you want to play: "))
+            suitOfPlayCard = ''
+            while not suitOfPlayCard in [ 'h', 'c', 'd', 's']:
+                suitOfPlayCard = str(input("Type in the first letter(h,c,d,s) of suit that you want to play: "))
+
+            playCard = ''
+            while not playCard in [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
+                playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
+        
+            chosenCard, checkPlayCard = askForCard(handWithSameSuit, playCard, suitOfPlayCard, True)
+            if checkPlayCard != "match":
+                print("Found no matched card \nTry Again!")
 
 
         else:
-            playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
-            for checkCard in handWithSameSuit:
-                if checkCard[0] == playCard:
-                    checkPlayCard = "match"
-                    chosenCard = checkCard
-                if checkPlayCard != "match":
-                    print("Found no matched card \nTry Again!")
+            
+            playCard = ''
+            while not playCard in [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
+                playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
+            
+            chosenCard, checkPlayCard = askForCard(handWithSameSuit, playCard, identifysuit, False)
+            if checkPlayCard != "match":
+                print("Found no matched card \nTry Again!")
             
 
 
-        playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
-        for checkCard in handWithSameSuit:
-            if checkCard[1][0] == suitOfPlayCard and checkCard[0] == playCard:
-                print("entered")
-                checkPlayCard = "match"
-                chosenCard = checkCard
-        if checkPlayCard != "match":
-                print("Found no matched card \nTry Again!")
+
 
 
     #remove played card from hand
@@ -101,9 +119,9 @@ def playable(players, numPlayer, identifyCard):
         if chosenCard in listOfSuits:
             listOfSuits.remove(chosenCard)
 
-    turnHand.remove([]) #the function turnHand somehow has empty list in it, this line removes it before returning
 
-    return chosenCard, turnHand
+
+    return chosenCard, turnHand, numPlayer
 
 
 
@@ -123,7 +141,7 @@ def main():
         assignHand(players[i],deck, 13)
 #--------------------------------------------------------------from heartCard.py
     #test
-    print(playable(players, 0, ['9', 'spades']))
+    print(playable(players, 0, ['8', 'hearts']))
 
 
 if __name__ == "__main__":
