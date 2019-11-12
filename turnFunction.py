@@ -43,10 +43,12 @@ def turn(players, firstTurn):
 #Note: need to add graveyard list after identifing who is taking the cards
 
 def main():
+#--------------------------------------------------------------from heartCard.py
     deck = createDeck()
     players = generatePlayers()
     for i in range(4):
         assignHand(players[i],deck, 13)
+#--------------------------------------------------------------from heartCard.py
     
     turn(players, False)
 
