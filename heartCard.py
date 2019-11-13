@@ -13,9 +13,8 @@ class player:
         self.hand = []
         self.graveyard = []
 
-    def recieveHand(self, cards):
-        self.hand = cards
-        return self.hand
+    def setHand(self, hand):
+        self.hand = hand
     
     #def addHand(self, card):
     #self.hand.append(card)
@@ -46,7 +45,7 @@ def createDeck():
     return deck
 
 
-
+#This should be a player method
 def assignHand(self, deck, numberofCards):
 
     currentHand = self.getHand()
