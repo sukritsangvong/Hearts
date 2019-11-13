@@ -6,14 +6,15 @@ from takeCardFromBoard import *
 def turn(players, firstTurn):
     
     #firstPlayer = function to determine the first player
-    firstPlayer = 0 #for testing, let the index 0 player be the starting player
+    firstPlayer = find2OfClubs(players)
+    print(firstPlayer)
     listOfBoard = ['no card yet']
     
     turnLeft = 4
     
     if firstTurn:
+        firstPlayer = find2OfClubs(players)
         #firstPlayer = function finding 2 of clubs
-        firstPlayer = 0
         listOfBoard = [['2', 'clubs']]
         turnLeft = 3
     
@@ -35,7 +36,7 @@ def turn(players, firstTurn):
             listOfBoard.append(cardPlayed)
 
 
-        players[numPlayer].recieveHand(handLeft)
+        players[numPlayer].setHand(handLeft)
         print(listOfBoard)
 
     return players
@@ -46,11 +47,12 @@ def main():
 #--------------------------------------------------------------from heartCard.py
     deck = createDeck()
     players = generatePlayers()
-    for i in range(4):
-        assignHand(players[i],deck, 13)
+    for player in players:
+        assignHand(player,deck, 13)
+        makeSortedHand(player)
 #--------------------------------------------------------------from heartCard.py
     
-    turn(players, False)
+    turn(players, True)
 
 
 if __name__ == "__main__":

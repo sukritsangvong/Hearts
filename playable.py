@@ -1,4 +1,5 @@
 from heartCard import *
+from roundFunction import *
 
 # might make this function to make code look a bit shorter later
 def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
@@ -33,7 +34,7 @@ def playable(players, numPlayer, identifyCard):
     turnHand = players[numPlayer].getHand()
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #for testing before having organized list
-    turnHand = [[['8', 'hearts'],['9', 'hearts']],[['2', 'clubs'],['5', 'clubs'],['10', 'clubs'],['J', 'clubs']],[['4', 'diamonds'], ['K', 'diamonds']], []]
+    #turnHand = [[['8', 'hearts'],['9', 'hearts']],[['2', 'clubs'],['5', 'clubs'],['10', 'clubs'],['J', 'clubs']],[['4', 'diamonds'], ['K', 'diamonds']], []]
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     noMatchingSuit = False
@@ -139,6 +140,7 @@ def main():
     #hand out the starting cards --> mutate the list of cards
     for i in range(4):
         assignHand(players[i],deck, 13)
+        makeSortedHand(players[i])
 #--------------------------------------------------------------from heartCard.py
     #test
     print(playable(players, 0, ['8', 'hearts']))

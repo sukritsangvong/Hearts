@@ -26,18 +26,45 @@ def findMinCard(suitList, i):
 
 def sortByMin(suitList):
     orderedSuit = []
-    for cards in suitList:
+    for i in range(len(suitList)):
         minCard = findMinCard(suitList, 0)
         orderedSuit.append(minCard)
         suitList.remove(minCard)
     return orderedSuit
 
-players = generatePlayers()
-deck = createDeck()
-assignHand(players[0], deck, 13)
-hand = sortSuits(players[0].getHand(), 'hearts')
-print(hand)
-print(findMinCard(hand, 0))
-print(sortByMin(hand))
+def makeSortedHand(player):
+    hand = player.getHand()
+    sortedHand = []
+    for suit in ['h', 'c', 'd', 's']:
+        suitList = sortSuits(hand, suit)
+        orderedSuit = sortByMin(suitList)
+        sortedHand.append(orderedSuit)
+    player.setHand(sortedHand)
+
+def find2OfClubs(players):
+    for player in players:
+        hand = player.getHand()
+        if hand[1] != []:
+            if hand[1][0] == ['2', 'clubs']:
+                return players.index(player)
+        
+        
+
+def main():
+#TEST CODE
+    print("-----------------------")
+    players = generatePlayers()
+    deck = createDeck()
+    for player in players:
+        assignHand(player, deck, 13)
+        makeSortedHand(player)
+        print(player.getHand())
+        print("-----------------")
+    print(find2OfClubs(players))
+
+if __name__ == "__main__":
+    main()
+
+
 
         
