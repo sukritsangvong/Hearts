@@ -17,9 +17,11 @@ def findMinCard(suitList, i):
     if i == len(suitList) - 1:
         return card
     else:
-        if values.index(card[0]) < values.index(findMinCard(suitList, i + 1)[0]):
+        minCard = values.index(card[0])
+        minOfRest = values.index(findMinCard(suitList, i + 1)[0])
+        if minCard < minOfRest:
             return card
-        if values.index(card[0]) > values.index(findMinCard(suitList, i + 1)[0]):
+        if minCard > minOfRest:
             return findMinCard(suitList, i + 1)
 
 
