@@ -2,12 +2,12 @@
 
 from heartCard import *
 
-#First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
     suitList = []
     for card in hand:
         if card[1][0] == suit[0]:
             suitList.append(card)
+
     return suitList
         
 def findMinCard(suitList, i):
@@ -67,4 +67,4 @@ if __name__ == "__main__":
 
 
 
-        
+
