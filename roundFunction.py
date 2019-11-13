@@ -24,6 +24,13 @@ def findMinCard(suitList, i):
         if minCard > minOfRest:
             return findMinCard(suitList, i + 1)
 
+def sortByMin(suitList):
+    orderedSuit = []
+    for cards in suitList:
+        minCard = findMinCard(suitList, 0)
+        orderedSuit.append(minCard)
+        suitList.remove(minCard)
+    return orderedSuit
 
 players = generatePlayers()
 deck = createDeck()
@@ -31,5 +38,6 @@ assignHand(players[0], deck, 13)
 hand = sortSuits(players[0].getHand(), 'hearts')
 print(hand)
 print(findMinCard(hand, 0))
+print(sortByMin(hand))
 
         
