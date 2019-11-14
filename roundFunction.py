@@ -2,12 +2,12 @@
 
 from heartCard import *
 
+#First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
     suitList = []
     for card in hand:
         if card[1][0] == suit[0]:
             suitList.append(card)
-
     return suitList
         
 def findMinCard(suitList, i):
@@ -48,10 +48,36 @@ def find2OfClubs(players):
             if hand[1][0] == ['2', 'clubs']:
                 return players.index(player)
         
-        
+def cardSwap(players):
+    for player in players:
+        if player == players[0]:
+            #Prompt the player to type the three cards they want
+            #to swap in the format <card#><1st letter of suit>
+            #Check to make sure those cards are in the hand.
+            #If not, repeat the prompt
+            #Finally, give cards clockwise 1st round, counterclockwise in 2nd,
+            #Across in 3rd, and no swap in 4th, then repeat for 5th, etc
+            #This will actually iterate every 13th round (if round = 4 turns)
 
-def main():
+def updateScore(player, graveyard):
+    '''This function will need to run at the end of every round,
+        ie, every 4th turn starting on the 4th turn'''
+    score = player.getScore()
+    for card in graveyard:
+        if card[1][0] == 'h':
+            score += 1
+        elif card == ['Q', 'spades']:
+            score += 13
+    player.setScore(score)
+    
+    
+
+
+
+
+
 #TEST CODE
+def main():
     print("-----------------------")
     players = generatePlayers()
     deck = createDeck()
@@ -67,4 +93,4 @@ if __name__ == "__main__":
 
 
 
-
+        

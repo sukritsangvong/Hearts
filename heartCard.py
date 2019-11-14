@@ -21,12 +21,14 @@ class player:
     def setHand(self, hand):
         self.hand = hand
     
-    #def addHand(self, card):
-    #self.hand.append(card)
-        #return self.hand
-
     def getHand(self):
         return self.hand
+
+    def setScore(player, score):
+        self.score = score
+
+    def getScore(player):
+        return self.score
 
     def getGraveyard(self):
         return self.graveyard()
