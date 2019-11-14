@@ -15,6 +15,7 @@ def turn(players, firstTurn):
     if firstTurn:
         firstPlayer = find2OfClubs(players)
         #firstPlayer = function finding 2 of clubs
+        players[firstPlayer].removeHand2Clubs
         listOfBoard = [['2', 'clubs']]
         turnLeft = 3
     

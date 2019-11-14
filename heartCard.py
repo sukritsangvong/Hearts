@@ -1,5 +1,10 @@
 import random
 
+from heartCard import *
+from playable import *
+from takeCardFromBoard import *
+
+
 def generatePlayers():
     players = []
     for i in range(4):
@@ -29,6 +34,9 @@ class player:
     def addGraveyard(self, listOfCollecetedCards):
         self.graveyard += listOfCollecetedCards
         return self.graveyard()
+
+    def removeHand2Clubs(self):
+        self.getHand()[1].remove(['2', 'clubs'])
     
 
 def createDeck():
@@ -120,6 +128,20 @@ def main():
     print("-----------")
     print("list of deck:", deck)
 
+def test():
+
+    #--------------------------------------------------------------from heartCard.py
+    deck = createDeck()
+    players = generatePlayers()
+    for player in players:
+        assignHand(player,deck, 13)
+        makeSortedHand(player)
+#--------------------------------------------------------------from heartCard.py
+    set = [[['5', 'hearts'], ['J', 'hearts']], [['2', 'clubs'], ['5', 'clubs'], ['9', 'clubs']], [['2', 'diamonds'], ['4', 'diamonds'], ['K', 'diamonds'], ['A', 'diamonds']], [['3', 'spades'], ['7', 'spades'], ['9', 'spades'], ['Q', 'spades']]]
+    players[0].setHand(set)
+    print("Player 1 : ", players[0].removeHand2Clubs())
+    print("Player 1 : ", players[0].getHand())
+
 if __name__ == "__main__":
-    main()
+    test()
 
