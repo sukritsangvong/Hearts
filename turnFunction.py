@@ -11,20 +11,24 @@ def turn(players, firstTurn):
     listOfBoard = ['no card yet']
     
     turnLeft = 4
+    addExtraTurn = 0
     
     if firstTurn:
         firstPlayer = find2OfClubs(players)
         #firstPlayer = function finding 2 of clubs
-        players[firstPlayer].removeHand2Clubs
+        players[firstPlayer].removeHand2Clubs()
         listOfBoard = [['2', 'clubs']]
         turnLeft = 3
+        addExtraTurn = 1
+    
+    print("Player : ", players[firstPlayer].getHand())
     
     for i in range(turnLeft):
         
-        turnPlayer = firstPlayer + i
+        turnPlayer = firstPlayer + i + addExtraTurn
         
         if turnPlayer > 3:
-            turnPlayer = 4 - turnPlayer
+            turnPlayer = turnPlayer % 4
         print('****')
         print('Cards on the Board:', listOfBoard)
         print('****')
@@ -52,8 +56,23 @@ def main():
         assignHand(player,deck, 13)
         makeSortedHand(player)
 #--------------------------------------------------------------from heartCard.py
-    
-    turn(players, True)
+    print("Player 1 : ", players[0].getHand())
+    print("-----------")
+    print("Player 2 : ", players[1].getHand())
+    print("-----------")
+    print("Player 3 : ", players[2].getHand())
+    print("-----------")
+    print("Player 4 : ", players[3].getHand())
+    print("-----------")
+    players = turn(players, True)
+    print("Player 1 : ", players[0].getHand())
+    print("-----------")
+    print("Player 2 : ", players[1].getHand())
+    print("-----------")
+    print("Player 3 : ", players[2].getHand())
+    print("-----------")
+    print("Player 4 : ", players[3].getHand())
+    print("-----------")
 
 
 if __name__ == "__main__":
