@@ -17,6 +17,7 @@ class player:
     def __init__(self):
         self.hand = []
         self.graveyard = []
+        self.score = 0
 
     def setHand(self, hand):
         self.hand = hand
@@ -24,10 +25,13 @@ class player:
     def getHand(self):
         return self.hand
 
-    def setScore(player, score):
+    def addToHand(self, card):
+        self.hand.append(card)
+
+    def setScore(self, score):
         self.score = score
 
-    def getScore(player):
+    def getScore(self):
         return self.score
 
     def getGraveyard(self):
