@@ -18,6 +18,7 @@ class player:
         self.hand = []
         self.graveyard = []
         self.score = 0
+        self.swaps = []
 
     def setHand(self, hand):
         self.hand = hand
@@ -27,6 +28,15 @@ class player:
 
     def addToHand(self, card):
         self.hand.append(card)
+
+    def appendHand(self,card):
+        self.hand.append(card)
+
+    def setSwaps(self,swapList):
+        for swap in swapList:
+            self.swaps.append(swap)
+    def getSwaps(self):
+        return self.swaps
 
     def addScore(self, score):
         self.score =+ score
