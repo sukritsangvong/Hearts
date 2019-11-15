@@ -28,8 +28,8 @@ class player:
     def addToHand(self, card):
         self.hand.append(card)
 
-    def setScore(self, score):
-        self.score = score
+    def addScore(self, score):
+        self.score =+ score
 
     def getScore(self):
         return self.score

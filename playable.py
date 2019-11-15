@@ -73,7 +73,7 @@ def playable(players, numPlayer, identifyCard):
 
     
     print("---------------------------------------------------\n")
-    print("Your Graveyard: ", players[numPlayer].getGraveyard(), '\n')
+    print("Your Score: ", players[numPlayer].getScore(), '\n')
     print("---------------------------------------------------\n")
     print("Your hand: ", turnHand, '\n')
     print("---------------------------------------------------\n")
