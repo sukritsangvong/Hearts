@@ -68,25 +68,24 @@ def cardSwap(players, handCount):
         hand = player.getHand()
         if player == players[0]:    #get the card choices from the player
             swapList = ['', '', '']
-            while swapList[0] not in hand and swapList[1] not in hand and #Need hand to be only a double list
+            hand = hand[0] + hand[1] + hand[2] + hand[3]
+            while swapList[0] not in hand and swapList[1] not in hand and \
                   swapList[2] not in hand or len(swapList) != 3:
                 print("Current hand: ", hand)
                 swapList = input(inputPrompt).split(',')
                 for i in range(len(swapList)):
                     swap = swapList[i]
                     print(swap)
-                    for suit in hand:
-                        for card in suit:
-                            #print(card, end="")
-                            if len(swap) == 3:
-                                #if the card to be swapped is a 10
-                                if card[0] == '10' and card[1][0] == str(swap[2]):
-                                    print(card)
-                                    swapList[i] = card
-                                    print(swap)
-                            elif len(swap) == 2 and str(swap[0]) == card[0] \
-                                                and str(swap[1]) == card[1][0]:
+                    for card in hand:
+                        if len(swap) == 3:
+                            #if the card to be swapped is a 10
+                            if card[0] == '10' and card[1][0] == str(swap[2]):
+                                print(card)
                                 swapList[i] = card
+                                print(swap)
+                        elif len(swap) == 2 and str(swap[0]) == card[0] \
+                                            and str(swap[1]) == card[1][0]:
+                            swapList[i] = card
                 print(swapList)
                 print("----------")
         else:                        #get the card choices from the bots
@@ -99,7 +98,8 @@ def cardSwap(players, handCount):
             destinationPlayerIndex += 4
         for swap in swapList:
             hand.remove(swap)
-            players[destinationPlayerIndex].addtoHand(swap)
+
+            players[destinationPlayerIndex].addToHand(swap)
 
            
 '''def updateScore(player, graveyard):
@@ -121,8 +121,8 @@ def cardSwap(players, handCount):
 
 
 
-def botSwap(botHand): #TEST
-    return [['1', 'clubs'],['1', 'spades'],['1', 'hearts']]
+def botSwap(hand): #TEST
+    return [hand[0],hand[1],hand[2]]
 
 #TEST CODE
 def main():
@@ -133,7 +133,10 @@ def main():
         assignHand(player, deck, 13)
         makeSortedHand(player)
     cardSwap(players, 1)
-    print(player[0].getHand())
+    print("---------------")
+    print(players[0].getHand())
+    print("---------------")
+    print(players[3].getHand())
     
     
 
