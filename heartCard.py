@@ -29,11 +29,11 @@ class player:
         return self.hand
 
     def getGraveyard(self):
-        return self.graveyard()
+        return self.graveyard
 
     def addGraveyard(self, listOfCollecetedCards):
         self.graveyard += listOfCollecetedCards
-        return self.graveyard()
+        return self.graveyard
 
     def removeHand2Clubs(self):
         self.getHand()[1].remove(['2', 'clubs'])

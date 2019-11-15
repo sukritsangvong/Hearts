@@ -37,11 +37,18 @@ def main():
     print("-----------")
     print("list of deck:", deck)
 
-    index2ofClubs = find2OfClubs(players))
-    players = turn(players, indexofClubs, True)
-    while players[0].getHand != [[],[],[],[]]:
-        players = turn(players, indexofClubs, False)
+    #test
+    players[0].setHand([[['9', 'hearts']],[['2', 'clubs']],[], []])
+    players[1].setHand([[['A', 'hearts']],[['5', 'clubs']],[], []])
+    players[2].setHand([[['2', 'hearts']],[['7', 'clubs']],[], []])
+    players[3].setHand([[['6', 'hearts']],[['8', 'clubs']],[], []])
 
+    index2ofClubs = find2OfClubs(players)
+    players, indexOfNextPlayer = turn(players, index2ofClubs, True)
+    while players[0].getHand() != [[],[],[],[]]:
+        players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+      
+    print('done')
 
 if __name__ == "__main__":
     main()

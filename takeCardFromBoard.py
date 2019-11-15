@@ -21,13 +21,14 @@ def faceToNum(checkFace):
 def takeCardFromBoard(listOfBoard):
     setSuit = listOfBoard[0][1]
     
-    highestNum = faceToNum(listOfBoard[0][0])
+    highestNum = int(faceToNum(listOfBoard[0][0]))
     returner = 0
     
     count = 1
     for otherCards in (listOfBoard[1:]):
-        if otherCards[1] == setSuit and otherCards[0] > highestNum:
+        if otherCards[1] == setSuit and int(faceToNum(otherCards[0])) > highestNum:
             returner = count
+            highestNum = int(faceToNum(otherCards[0]))
         count += 1
 
     return returner
@@ -38,7 +39,7 @@ def takeCardFromBoard(listOfBoard):
 
 
 def main():
-    print(takeCardFromBoard([['8', 'hearts'],['2', 'clubs'],['9', 'hearts'],['5', 'clubs']]))
+    print(takeCardFromBoard([['2', 'clubs'], ['K', 'clubs'], ['A', 'clubs'], ['5', 'clubs']]))
 
 if __name__ == "__main__":
     main()

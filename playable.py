@@ -72,11 +72,13 @@ def playable(players, numPlayer, identifyCard):
                     noMatchingSuit = True
 
     
-    print("---------------------------------------------------")
-    print("Your hand: ", turnHand)
-    print("---------------------------------------------------")
-    print("The card(s) that you can play: ",handWithSameSuit)
-    print("---------------------------------------------------")
+    print("---------------------------------------------------\n")
+    print("Your Graveyard: ", players[numPlayer].getGraveyard(), '\n')
+    print("---------------------------------------------------\n")
+    print("Your hand: ", turnHand, '\n')
+    print("---------------------------------------------------\n")
+    print("The card(s) that you can play: ",handWithSameSuit, '\n')
+    print("---------------------------------------------------\n")
 
 #--------------------------------choose card to play part----------------------------
     checkPlayCard = "not match"

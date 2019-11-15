@@ -7,7 +7,6 @@ def turn(players, numOfStartPlayer, firstTurn):
     
     #firstPlayer = function to determine the first player
     firstPlayer = numOfStartPlayer
-    print(firstPlayer)
     listOfBoard = ['no card yet']
     
     turnLeft = 4
@@ -42,7 +41,14 @@ def turn(players, numOfStartPlayer, firstTurn):
         players[numPlayer].setHand(handLeft)
         print(listOfBoard)
 
-    return players
+            
+            
+
+    indexFromStartPlayer = takeCardFromBoard(listOfBoard)
+    indexOfNextPlayer = (numOfStartPlayer + indexFromStartPlayer) % 4
+    players[indexOfNextPlayer].addGraveyard(listOfBoard)
+
+    return players, indexOfNextPlayer
     
 #Note: need to add graveyard list after identifing who is taking the cards
 
