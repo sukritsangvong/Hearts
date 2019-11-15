@@ -75,7 +75,8 @@ def cardSwap(players, handCount):
                 swapList = input(inputPrompt).split(',')
                 for i in range(len(swapList)):
                     swap = swapList[i]
-                    print(swap)
+                    print('swap', swap)
+                    print('hand', hand)
                     for card in hand:
                         if len(swap) == 3:
                             #if the card to be swapped is a 10
