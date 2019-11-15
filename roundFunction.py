@@ -1,4 +1,4 @@
-#roundhand.py
+#roundFunction.py
 #contains functions to make both rounds and hands work
 
 from heartCard import *
@@ -10,6 +10,7 @@ def sortSuits(hand, suit):
         if card[1][0] == suit[0]:
             suitList.append(card)
     return suitList
+
         
 def findMinCard(suitList, i):
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 
@@ -49,61 +50,71 @@ def find2OfClubs(players):
             if hand[1][0] == ['2', 'clubs']:
                 return players.index(player)
         
-def cardSwap(players, handCount):
-    '''This function will be called at the beginning of every hand (or every 13 rounds)'''       
+def cardSwap(players, handCount):       
+    #Choose the cards that you want to pass to another player
+    #Only call if handCount is between 1 and 3
     if handCount == 1:
         direction = "to the left of"
-        playerIndexChange = -1
     elif handCount == 2:
         direction = "to the right of"
-        playerIndexChange = 1
     elif handCount == 3:
         direction == "across from"
-        playerIndexChange = 2
-    #No swap in the 4th round
     inputPrompt = "Choose 3 cards from your hand (by typing only the values " \
                   "and the first letters of the suits of each card separated " \
-                  "by commas to give to the player " + direction + " you: "
+                  "by commas) to give to the player " + direction + " you: "
     for player in players:
         hand = player.getHand()
+        hand = hand[0] + hand[1] + hand[2] + hand[3]
         if player == players[0]:    #get the card choices from the player
             swapList = ['', '', '']
-            hand = hand[0] + hand[1] + hand[2] + hand[3]
-            while swapList[0] not in hand and swapList[1] not in hand and \
-                  swapList[2] not in hand or len(swapList) != 3:
+            while swapList[0] not in hand or swapList[1] not in hand or \
+                swapList[2] not in hand or len(swapList) != 3:
                 print("Current hand: ", hand)
                 swapList = input(inputPrompt).split(',')
                 for i in range(len(swapList)):
                     swap = swapList[i]
-                    print('swap', swap)
-                    print('hand', hand)
+
                     for card in hand:
-                        if len(swap) == 3:
-                            #if the card to be swapped is a 10
+                        if len(swap) == 3:    #if the card to be swapped is a 10
                             if card[0] == '10' and card[1][0] == str(swap[2]):
-                                print(card)
                                 swapList[i] = card
-                                print(swap)
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
                             swapList[i] = card
-                print(swapList)
-                print("----------")
-        else:                        #get the card choices from the bots
+            #print("SWAAAAAAAAAAAP")
+            #print(swapList)
+        else:                       #get the card choices from the bots
             swapList = botSwap(hand)
 
+        for swap in swapList:
+            hand.remove(swap)
+        player.setHand(hand)
+        player.setSwaps(swapList)
+    return players
+
+def giveSwaps(players, handCount):
+    #Give swapped cards to the target player
+    #CAN ONLY BE USED AFTER cardSwap is RUN!
+    if handCount == 1:
+        playerIndexChange = -1
+    elif handCount == 2:
+        playerIndexChange = 1
+    elif handCount == 3:
+        playerIndexChange = 2
+    for player in players:
         destinationPlayerIndex = players.index(player) + playerIndexChange
+        destPlayer = players[destinationPlayerIndex]
         if destinationPlayerIndex > 3:
             destinationPlayerIndex -= 4
         elif destinationPlayerIndex < 0:
             destinationPlayerIndex += 4
-        for swap in swapList:
-            hand.remove(swap)
-
-            players[destinationPlayerIndex].addToHand(swap)
+        for swap in player.getSwaps():
+            destPlayer.appendHand([swap])
+        makeSortedHand(destPlayer)
+    return players    
 
            
-'''def updateScore(player, graveyard):
+def updateScore(player, graveyard):
     This function will need to run at the end of every round,
         ie, every 4th turn starting on the 4th turn
     score = player.getScore()
@@ -112,18 +123,17 @@ def cardSwap(players, handCount):
             score += 1
         elif card == ['Q', 'spades']:
             score += 13
-    player.setScore(score)'''
+    player.setScore(score)
+    return player
     
-#def round(players):
-    #for player in players:
-        #run 4 turns then updateScore() for each player, then starts over
-        #if it is the first round in a hand, the first turn must play
-        #the 2 of clubs
 
 
 
 def botSwap(hand): #TEST
     return [hand[0],hand[1],hand[2]]
+#get rid of any spade > J
+#get rid of high hearts
+#unless bot has 3 or less of a suit, then get rid of all of that suit
 
 #TEST CODE
 def main():
@@ -133,11 +143,14 @@ def main():
     for player in players:
         assignHand(player, deck, 13)
         makeSortedHand(player)
-    cardSwap(players, 1)
-    print("---------------")
-    print(players[0].getHand())
-    print("---------------")
-    print(players[3].getHand())
+    cardSwap(players,1)
+    giveSwaps(players,1)
+    for player in players:
+        print(player.getHand())
+   
+   
+   
+    
     
     
 
