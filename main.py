@@ -38,19 +38,29 @@ def main():
     print("list of deck:", deck)
 
     #test
-    players[0].setHand([[['9', 'hearts']],[['2', 'clubs']],[], []])
-    players[1].setHand([[['A', 'hearts'],['5', 'hearts']],[],[], []])
-    players[2].setHand([[['2', 'hearts']],[['7', 'clubs']],[], []])
-    players[3].setHand([[['6', 'hearts']],[['8', 'clubs']],[], []])
+    players[0].setHand([[['9', 'hearts']],[['2', 'clubs'],['A', 'clubs']],[], []])
+    players[1].setHand([[['A', 'hearts'],['5', 'hearts'],['K', 'hearts']],[],[], []])
+    players[2].setHand([[['2', 'hearts']],[['7', 'clubs'],['Q', 'clubs']],[], []])
+    players[3].setHand([[['6', 'hearts']],[['8', 'clubs'],['J', 'clubs']],[], []])
 
-    index2ofClubs = find2OfClubs(players)
-    players, indexOfNextPlayer = turn(players, index2ofClubs, True)
-    updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
-    players[indexOfNextPlayer].addScore(updateScore)
-    while players[0].getHand() != [[],[],[],[]]:
-        players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+    roundCount = 1
+    while players[0].getScore != 100 or players[1].getScore != 100 \
+        or players[2].getScore != 100 or players[3].getScore != 100:
+        
+        roundCount = roundCount % 4
+        cardSwap(players,roundCount)
+        giveSwaps(players,roundCount)
 
-    print('done')
+        index2ofClubs = find2OfClubs(players)
+        players, indexOfNextPlayer = turn(players, index2ofClubs, True)
+        updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
+        players[indexOfNextPlayer].addScore(updateScore)
+        while players[0].getHand() != [[],[],[],[]]:
+            players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+
+        roundCount += 1
+
+
 
 if __name__ == "__main__":
     main()

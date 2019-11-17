@@ -109,14 +109,14 @@ def giveSwaps(players, handCount):
         elif destinationPlayerIndex < 0:
             destinationPlayerIndex += 4
         for swap in player.getSwaps():
-            destPlayer.appendHand([swap])
+            destPlayer.appendHand(swap)
         makeSortedHand(destPlayer)
     return players    
 
            
 def updateScore(player, graveyard):
-    This function will need to run at the end of every round,
-        ie, every 4th turn starting on the 4th turn
+    #This function will need to run at the end of every round,
+    #ie, every 4th turn starting on the 4th turn
     score = player.getScore()
     for card in graveyard:
         if card[1][0] == 'h':
