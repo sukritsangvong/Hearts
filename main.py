@@ -27,15 +27,7 @@ def main():
         assignHand(player,deck, 13)
         makeSortedHand(player)
 
-    print("Player 1 : ", players[0].getHand())
-    print("-----------")
-    print("Player 2 : ", players[1].getHand())
-    print("-----------")
-    print("Player 3 : ", players[2].getHand())
-    print("-----------")
-    print("Player 4 : ", players[3].getHand())
-    print("-----------")
-    print("list of deck:", deck)
+
 
     #test
     players[0].setHand([[['9', 'hearts']],[['2', 'clubs'],['A', 'clubs']],[], []])
@@ -50,11 +42,21 @@ def main():
         roundCount = roundCount % 4
         cardSwap(players,roundCount)
         giveSwaps(players,roundCount)
+        
+        print("Player 1 : ", players[0].getHand())
+        print("-----------")
+        print("Player 2 : ", players[1].getHand())
+        print("-----------")
+        print("Player 3 : ", players[2].getHand())
+        print("-----------")
+        print("Player 4 : ", players[3].getHand())
+        print("-----------")
 
         index2ofClubs = find2OfClubs(players)
         players, indexOfNextPlayer = turn(players, index2ofClubs, True)
         updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
         players[indexOfNextPlayer].addScore(updateScore)
+
         while players[0].getHand() != [[],[],[],[]]:
             players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
 
