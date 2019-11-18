@@ -58,7 +58,7 @@ def cardSwap(players, handCount):
     elif handCount == 2:
         direction = "to the right of"
     elif handCount == 3:
-        direction == "across from"
+        direction = "across from"
     inputPrompt = "Choose 3 cards from your hand (by typing only the values " \
                   "and the first letters of the suits of each card separated " \
                   "by commas) to give to the player " + direction + " you: "
@@ -103,6 +103,7 @@ def giveSwaps(players, handCount):
         playerIndexChange = 2
     for player in players:
         destinationPlayerIndex = players.index(player) + playerIndexChange
+        destinationPlayerIndex = destinationPlayerIndex % 4
         destPlayer = players[destinationPlayerIndex]
         if destinationPlayerIndex > 3:
             destinationPlayerIndex -= 4
@@ -137,19 +138,37 @@ def botSwap(hand): #TEST
 
 #TEST CODE
 def main():
+    
     print("-----------------------")
     players = generatePlayers()
     deck = createDeck()
     for player in players:
         assignHand(player, deck, 13)
         makeSortedHand(player)
-    cardSwap(players,1)
-    giveSwaps(players,1)
-    for player in players:
-        print(player.getHand())
+    
+    print("----BEFOREEEEEEEEEEEEEEE------")
+    print("Player 1 : ", players[0].getHand())
+    print("-----------")
+    print("Player 2 : ", players[1].getHand())
+    print("-----------")
+    print("Player 3 : ", players[2].getHand())
+    print("-----------")
+    print("Player 4 : ", players[3].getHand())
+    print("-----------")
+
+    cardSwap(players,3)
+    giveSwaps(players,3)
+
    
-   
-   
+    print("----AFTERRRRRRRRRRRR------")
+    print("Player 1 : ", players[0].getHand())
+    print("-----------")
+    print("Player 2 : ", players[1].getHand())
+    print("-----------")
+    print("Player 3 : ", players[2].getHand())
+    print("-----------")
+    print("Player 4 : ", players[3].getHand())
+    print("-----------")
     
     
     
