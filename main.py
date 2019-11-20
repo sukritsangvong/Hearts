@@ -20,7 +20,7 @@ def main():
 
     #generate players
     players = generatePlayers()
-    print(players)
+
 
     #hand out the starting cards --> mutate the list of cards
     for player in players:
@@ -30,10 +30,10 @@ def main():
 
 
     #test
-    players[0].setHand([[['9', 'hearts']],[['2', 'clubs'],['A', 'clubs']],[], []])
-    players[1].setHand([[['A', 'hearts'],['5', 'hearts'],['K', 'hearts']],[],[], []])
-    players[2].setHand([[['2', 'hearts']],[['7', 'clubs'],['Q', 'clubs']],[], []])
-    players[3].setHand([[['6', 'hearts']],[['8', 'clubs'],['J', 'clubs']],[], []])
+#    players[0].setHand([[['9', 'hearts']],[['2', 'clubs'],['A', 'clubs']],[], []])
+#    players[1].setHand([[['A', 'hearts'],['5', 'hearts'],['K', 'hearts']],[],[], []])
+#    players[2].setHand([[['2', 'hearts']],[['7', 'clubs'],['Q', 'clubs']],[], []])
+#    players[3].setHand([[['6', 'hearts']],[['8', 'clubs'],['J', 'clubs']],[], []])
 
     roundCount = 1
     while players[0].getScore != 100 or players[1].getScore != 100 \
@@ -59,6 +59,18 @@ def main():
 
         while players[0].getHand() != [[],[],[],[]]:
             players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+        
+        #generate deck
+        deck = createDeck()
+
+        #generate players
+        players = generatePlayers()
+    
+    
+        #hand out the starting cards --> mutate the list of cards
+        for player in players:
+            assignHand(player,deck, 13)
+            makeSortedHand(player)
 
         roundCount += 1
 
