@@ -82,11 +82,8 @@ def cardSwap(players, handCount):
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
                             swapList[i] = card
-            #print("SWAAAAAAAAAAAP")
-            #print(swapList)
         else:                       #get the card choices from the bots
-            swapList = botSwap(player.getHand())
-
+            swapList = botSwap(hand)
         for swap in swapList:
             hand.remove(swap)
         player.setHand(hand)
