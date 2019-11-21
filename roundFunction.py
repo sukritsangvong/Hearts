@@ -62,7 +62,7 @@ def cardSwap(players, handCount):
         direction = "across from"
     inputPrompt = "Choose 3 cards from your hand (by typing only the values " \
                   "and the first letters of the suits of each card separated " \
-                  "by commas) to give to the player " + direction + " you: "
+                  "by spaces) to give to the player " + direction + " you: "
     for player in players:
         hand = player.getHand()
         hand = hand[0] + hand[1] + hand[2] + hand[3]
@@ -71,10 +71,9 @@ def cardSwap(players, handCount):
             while swapList[0] not in hand or swapList[1] not in hand or \
                 swapList[2] not in hand or len(swapList) != 3:
                 print("Current hand: ", hand)
-                swapList = input(inputPrompt).split(',')
+                swapList = input(inputPrompt).split(' ')
                 for i in range(len(swapList)):
                     swap = swapList[i]
-
                     for card in hand:
                         if len(swap) == 3:    #if the card to be swapped is a 10
                             if card[0] == '10' and card[1][0] == str(swap[2]):
@@ -82,6 +81,7 @@ def cardSwap(players, handCount):
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
                             swapList[i] = card
+            
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
         for swap in swapList:
@@ -126,13 +126,6 @@ def updateScore(player, graveyard):
     return player
     
 
-
-
-def botSwap(hand): #TEST
-    return [hand[0],hand[1],hand[2]]
-#get rid of any spade > J
-#get rid of high hearts
-#unless bot has 3 or less of a suit, then get rid of all of that suit
 
 #TEST CODE
 def main():
