@@ -2,6 +2,7 @@
 #contains functions to make both rounds and hands work
 
 from heartCard import *
+from botSwap import *
 
 #First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
@@ -84,7 +85,7 @@ def cardSwap(players, handCount):
             #print("SWAAAAAAAAAAAP")
             #print(swapList)
         else:                       #get the card choices from the bots
-            swapList = botSwap(hand)
+            swapList = botSwap(player.getHand())
 
         for swap in swapList:
             hand.remove(swap)
