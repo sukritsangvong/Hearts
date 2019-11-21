@@ -1,5 +1,6 @@
 #botSwap.py
 #bot decision network for picking cards to swap @ beginning of round
+#add
 
 from roundFunction import *
 from heartCard import *
