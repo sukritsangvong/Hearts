@@ -7,6 +7,11 @@ from heartCard import *
 def swapPick(hand):
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     hearts, clubs, diamonds, spades = [],[],[],[]
+    cards = [hearts, clubs, diamonds, spades]
+    for check in range(4):
+        if len(cards[check]) == 3:
+            return cards[0], cards[1] + cards[2]
+    
     for card in hand:
         if card[1] == 'hearts':
             hearts.append(card)
