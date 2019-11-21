@@ -5,9 +5,24 @@
 from roundFunction import *
 from heartCard import *
 
-def swapPick(hand):
+def orderHand(hand):
+    values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    handOrderedByValue = []
+    while len(hand) > 0:
+        maxVal = 0
+        maxCard = []
+        for card in hand:
+            if values.index(card[0]) >= maxVal:
+                maxVal, maxCard = values.index(card[0]), card
+        handOrderedByValue.append(maxCard)
+        hand.remove(maxCard)
+    return handOrderedByValue
+
+def botSwap(hand):
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     hearts, clubs, diamonds, spades = [],[],[],[]
+    swapList = []
+    
     for card in hand:
         if card[1] == 'hearts':
             hearts.append(card)
@@ -17,28 +32,41 @@ def swapPick(hand):
             diamonds.append(card)
         if card[1] == 'spades':
             spades.append(card)
-    print(hearts,clubs,diamonds,spades)
-    
+            
     for suit in [hearts, clubs, diamonds, spades]:
-        if len(suit) <= 3:
+        #The bot will get rid of whole suits if it can
+        if len(suit) == 3 and ['2', 'clubs'] not in suit:
             return suit
+        elif len(suit) < 3:
+            suitIndex = 0
+            while len(swapList) + len(suit) < 3 and len(suit) > suitIndex:
+                if suit[suitIndex] != ['2', 'clubs']:
+                    swapList.append(suit[suitIndex])
+                suitIndex += 1
+                    
+    if ['Q', 'spades'] in spades and len(swapList) < 3:
+            swapList.append(['Q', 'spades'])
+            spades.remove(['Q', 'spades'])
+    if ['A', 'spades'] in spades and len(swapList) < 3:
+            swapList.append(['A', 'spades'])
+            spades.remove(['A', 'spades'])
+    if ['K', 'spades'] in spades and len(swapList) < 3:
+            swapList.append(['K', 'spades'])
+            spades.remove(['K', 'spades'])
 
-    if ['Q', 'spades'] in spades:
-        return ['Q', 'spades']
-    if ['A', 'spades'] in spades:
-        return ['A', 'spades']
-    if ['K', 'spades'] in spades:
-        return ['K', 'spades']
     for card in hearts:
-        if values.index(card[0]) > 5:
-            return 
-    
+        if values.index(card[0]) > 5 and card not in swapList \
+            and len(swapList) < 3:
+                swapList.append(card)
 
-
-'''def botSwap(hand):
-    while len(swapList) <= 3:
-        swapList.append(swapPick(hand))
-    return swapList'''
+    orderedHand = orderHand(hand)
+    for card in orderedHand:
+        handIndex = 0
+        while len(swapList) < 3:
+          swapList.append(orderedHand[handIndex])
+          handIndex += 1
+          
+    return swapList
 
 def main():
     players = generatePlayers()
@@ -48,7 +76,10 @@ def main():
         makeSortedHand(player)
     hand = players[1].getHand()
     hand = hand[0] + hand[1] + hand[2] + hand[3]
-    print(swapPick(hand))
+    print(hand)
+    print("------------")
+    print(botSwap(hand))
+    
 
 if __name__ == "__main__":
     main()
