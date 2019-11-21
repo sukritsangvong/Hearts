@@ -1,6 +1,7 @@
 from heartCard import *
 from roundFunction import *
 from botPickCard import *
+from botswap import *
 
 # might make this function to make code look a bit shorter later
 def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):

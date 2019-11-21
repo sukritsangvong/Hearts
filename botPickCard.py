@@ -20,7 +20,7 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand):
             
             #if have high hearts
             if card[1] == 'hearts':
-                if card[1] > '5':
+                if card[1] > '5' or card[1] == '10':
                     return card
         
         #see which suit has the least amount of card left

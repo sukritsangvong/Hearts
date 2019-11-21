@@ -2,7 +2,7 @@
 #contains functions to make both rounds and hands work
 
 from heartCard import *
-from botSwap import *
+from botswap import *
 
 #First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
