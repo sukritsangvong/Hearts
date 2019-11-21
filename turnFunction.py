@@ -3,6 +3,7 @@ from heartCard import *
 from playable import *
 from takeCardFromBoard import *
 
+
 def turn(players, numOfStartPlayer, firstTurn):
     
     #firstPlayer = function to determine the first player
@@ -29,7 +30,9 @@ def turn(players, numOfStartPlayer, firstTurn):
         print('****')
         print('Cards on the Board:', listOfBoard)
         print('****')
-        
+
+
+        print(listOfBoard[0])
         cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0])
         
         if listOfBoard[0] == 'no card yet':
@@ -68,7 +71,7 @@ def main():
     print("-----------")
     print("Player 4 : ", players[3].getHand())
     print("-----------")
-    players = turn(players, True)
+    players = turn(players, True, False)
     print("Player 1 : ", players[0].getHand())
     print("-----------")
     print("Player 2 : ", players[1].getHand())

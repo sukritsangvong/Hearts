@@ -1,13 +1,53 @@
 from heartCard import *
 from roundFunction import *
+import random
 
-def botPickCard(handWithSameSuit, noMatchingSuit, turnHand):
+def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard):
 
     chosenCard = ''
         
     if noMatchingSuit: #not going to take the cards on the board
+
+        #see which suit has the least amount of card left
+        leastAmount = 13
+        leastSuit = ['Suit with the least amount of card']
+        for i in range(4):
+            if len(turnHand[i]) != 0 and len(turnHand[i]) < leastAmount:
+                leastAmount = len(turnHand[i])
+                leastSuit[0] = turnHand[i][0][1]
+
+        #to random the suit that bot starts to check
+        randomint = random.randint(0, 3)
+
+        if identifyCard == 'no card yet':#if the first player to play
+            
+            
+            #play the small suit that has least number of card
+            for card in handWithSameSuit:
+                if card[1] == leastSuit[0] and card[0] < '6' and card[0] != '10':
+                    return card
+        
+            #play the small number of card
+            for suit in turnHand[randomint:4]:
+                for card in suit:
+                    if card[0] < '6' and card[0] != '10':
+                        return card
+
+            if randomint != 0:
+                for suit in turnHand[:randomint]:
+                    for card in suit:
+                        if card[0] < '6' and card[0] != '10':
+                            return card
+            
+            #play the suit that has least number of card
+            for card in handWithSameSuit:
+                if card[1] == leastSuit[0]:
+                    return card
+    
+    
         #reverse to descending order
         handWithSameSuit.reverse()
+
         for card in (handWithSameSuit):
             print('this is cardddd', card)
             
@@ -23,13 +63,8 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand):
                 if card[1] > '5' or card[1] == '10':
                     return card
         
-        #see which suit has the least amount of card left
-        leastAmount = 13
-        leastSuit = ['Suit with the least amount of card']
+
         for i in range(4):
-            if len(turnHand[i]) != 0 and len(turnHand[i]) < leastAmount:
-                leastSuit[0] = turnHand[i][0][1]
-                print(leastSuit[0],'this is suiitttt')
             if len(turnHand[i]) == 1: #if have only 1 card of any suits left, play it
                 return card
             

@@ -36,7 +36,7 @@ def playable(players, numPlayer, identifyCard):
     turnHand = players[numPlayer].getHand()
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #for testing before having organized list
-    #turnHand = [[['8', 'hearts'],['9', 'hearts']],[['2', 'clubs'],['5', 'clubs'],['10', 'clubs'],['J', 'clubs']],[['4', 'diamonds'], ['K', 'diamonds']], []]
+    # turnHand = [[['10', 'hearts'],['A', 'hearts']], [['4', 'clubs'], ['9', 'clubs'], ['10', 'clubs'], ['A', 'clubs']], [['9', 'diamonds']], [['2', 'spades'], ['4', 'spades'], ['7', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     noMatchingSuit = False
@@ -117,7 +117,7 @@ def playable(players, numPlayer, identifyCard):
     
 
     else:
-        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand)
+        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard)
 
 
     #remove played card from hand
@@ -149,7 +149,7 @@ def main():
         makeSortedHand(players[i])
 #--------------------------------------------------------------from heartCard.py
     #test
-    print(playable(players, 1, ['8', 'hearts']))
+    print(playable(players, 1, 'no card yet' ))
 
 
 if __name__ == "__main__":
