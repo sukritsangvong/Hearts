@@ -7,11 +7,6 @@ from heartCard import *
 def swapPick(hand):
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     hearts, clubs, diamonds, spades = [],[],[],[]
-    cards = [hearts, clubs, diamonds, spades]
-    for check in range(4):
-        if len(cards[check]) == 3:
-            return cards[0], cards[1] + cards[2]
-    
     for card in hand:
         if card[1] == 'hearts':
             hearts.append(card)
@@ -23,11 +18,15 @@ def swapPick(hand):
             spades.append(card)
     print(hearts,clubs,diamonds,spades)
     
+    for suit in [hearts, clubs, diamonds, spades]:
+        if len(suit) <= 3:
+            return suit
+
     if ['Q', 'spades'] in spades:
         return ['Q', 'spades']
-    if ['A', 'spades'] in hand:
+    if ['A', 'spades'] in spades:
         return ['A', 'spades']
-    if ['K', 'spades'] in hand:
+    if ['K', 'spades'] in spades:
         return ['K', 'spades']
     for card in hearts:
         if values.index(card[0]) > 5:
@@ -35,11 +34,10 @@ def swapPick(hand):
     
 
 
-def botSwap(hand):
-    swapList = []
+'''def botSwap(hand):
     while len(swapList) <= 3:
         swapList.append(swapPick(hand))
-    return swapList
+    return swapList'''
 
 def main():
     players = generatePlayers()
