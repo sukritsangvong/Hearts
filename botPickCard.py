@@ -2,7 +2,7 @@ from heartCard import *
 from roundFunction import *
 import random
 
-def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard):
+def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn):
 
     chosenCard = ''
         
@@ -50,16 +50,22 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard):
 
         for card in (handWithSameSuit):
             
+            #try to give out score!
             #if have Q of spades, K of spades, or A of spades, play it
-            if card[1] == 'spades':
-                if card[1] == 'Q':
-                    return card
-                elif card[1] == 'K' or card[1] == 'A':
-                    return card
-            
-            #if have high hearts
-            if card[1] == 'hearts':
-                if card[1] > '5' or card[1] == '10':
+            if not firstTurn: #don't want to fire score in the first turn
+                if card[1] == 'spades':
+                    if card[1] == 'Q':
+                        return card
+                    elif card[1] == 'K' or card[1] == 'A':
+                        return card
+                
+                #if have high hearts
+                if card[1] == 'hearts':
+                    if card[1] > '5' or card[1] == '10':
+                        return card
+
+            #still want to discard K and A even if it is a first Turn
+                if card[1] == 'K' or card[1] == 'A':
                     return card
         
 
