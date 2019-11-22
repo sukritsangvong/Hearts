@@ -6,6 +6,8 @@ from botswap import *
 
 #First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
+    '''Helper function for makeSortedHand. Creates a list of all the cards
+        of a given suit that are in the hand'''
     suitList = []
     for card in hand:
         if card[1][0] == suit[0]:
@@ -14,6 +16,7 @@ def sortSuits(hand, suit):
 
         
 def findMinCard(suitList, i):
+    '''Helper for sorting. Finds the smallest value card in a list of cards'''
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 
               'J', 'Q', 'K', 'A']
     card = suitList[i]
@@ -28,6 +31,7 @@ def findMinCard(suitList, i):
             return findMinCard(suitList, i + 1)
 
 def sortByMin(suitList):
+    '''Sorts a list by value from least to greatest'''
     orderedSuit = []
     for i in range(len(suitList)):
         minCard = findMinCard(suitList, 0)
@@ -36,6 +40,7 @@ def sortByMin(suitList):
     return orderedSuit
 
 def makeSortedHand(player):
+    '''Sorts a hand by suit and by value'''
     hand = player.getHand()
     sortedHand = []
     for suit in ['h', 'c', 'd', 's']:
@@ -45,6 +50,7 @@ def makeSortedHand(player):
     player.setHand(sortedHand)
 
 def find2OfClubs(players):
+    '''Finds the player who has the 2 of clubs'''
     for player in players:
         hand = player.getHand()
         if hand[1] != []:
@@ -53,7 +59,7 @@ def find2OfClubs(players):
         
 def cardSwap(players, handCount):       
     #Choose the cards that you want to pass to another player
-    #Only call if handCount is between 1 and 3
+    #Doesn't swap any cards every 4th round
     if handCount == 1:
         direction = "to the left of"
     elif handCount == 2:
