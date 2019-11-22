@@ -49,7 +49,6 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard):
         handWithSameSuit.reverse()
 
         for card in (handWithSameSuit):
-            print('this is cardddd', card)
             
             #if have Q of spades, K of spades, or A of spades, play it
             if card[1] == 'spades':

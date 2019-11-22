@@ -19,8 +19,6 @@ def turn(players, numOfStartPlayer, firstTurn):
         turnLeft = 3
         addExtraTurn = 1
     
-    print("Player : ", players[firstPlayer].getHand())
-    
     for i in range(turnLeft):
         
         turnPlayer = firstPlayer + i + addExtraTurn
@@ -32,7 +30,6 @@ def turn(players, numOfStartPlayer, firstTurn):
         print('****')
 
 
-        print(listOfBoard[0])
         cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0])
         
         if listOfBoard[0] == 'no card yet':
@@ -42,7 +39,6 @@ def turn(players, numOfStartPlayer, firstTurn):
 
 
         players[numPlayer].setHand(handLeft)
-        print(listOfBoard)
 
             
             
