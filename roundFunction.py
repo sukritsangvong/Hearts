@@ -60,6 +60,8 @@ def cardSwap(players, handCount):
         direction = "to the right of"
     elif handCount == 3:
         direction = "across from"
+    elif handCount == 4:
+        return players
     inputPrompt = "Choose 3 cards from your hand (by typing only the values " \
                   "and the first letters of the suits of each card separated " \
                   "by spaces) to give to the player " + direction + " you: "
@@ -80,8 +82,7 @@ def cardSwap(players, handCount):
                                 swapList[i] = card
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
-                            swapList[i] = card
-            
+                            swapList[i] = card   
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
         for swap in swapList:
@@ -99,6 +100,8 @@ def giveSwaps(players, handCount):
         playerIndexChange = 1
     elif handCount == 3:
         playerIndexChange = 2
+    elif handCount == 4:
+        return players
     for player in players:
         destinationPlayerIndex = players.index(player) + playerIndexChange
         destinationPlayerIndex = destinationPlayerIndex % 4
