@@ -9,6 +9,7 @@ def orderHand(hand):
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     handOrderedByValue = []
     while len(hand) > 0:
+        hand = hand.copy()
         maxVal = 0
         maxCard = []
         for card in hand:
@@ -74,12 +75,12 @@ def main():
     for player in players:
         assignHand(player, deck, 13)
         makeSortedHand(player)
-    hand = players[1].getHand()
+    hand = players[2].getHand()
     hand = hand[0] + hand[1] + hand[2] + hand[3]
-    print(hand)
-    print("------------")
-    print(botSwap(hand))
-    
+    #print(hand)
+    #print("------------")
+    #print(botSwap(hand))
+    print(orderHand(hand))
 
 if __name__ == "__main__":
     main()
