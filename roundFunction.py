@@ -91,10 +91,8 @@ def cardSwap(players, handCount):
                             swapList[i] = card   
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
-<<<<<<< HEAD
-=======
-
->>>>>>> f29c7b33b7383e9139314256ad82e37420e1cc8d
+        #print("HAND:", hand)
+        #print("SWAPLIST:",swapList)
         for swap in swapList:
             hand.remove(swap)
         player.setHand(hand)
@@ -116,10 +114,6 @@ def giveSwaps(players, handCount):
         destinationPlayerIndex = players.index(player) + playerIndexChange
         destinationPlayerIndex = destinationPlayerIndex % 4
         destPlayer = players[destinationPlayerIndex]
-        if destinationPlayerIndex > 3:
-            destinationPlayerIndex -= 4
-        elif destinationPlayerIndex < 0:
-            destinationPlayerIndex += 4
         for swap in player.getSwaps():
             destPlayer.appendHand(swap)
         makeSortedHand(destPlayer)
