@@ -70,7 +70,6 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard):
             
         #play suit that has the least amount of cards
         for card in (handWithSameSuit):
-            print('enter and this is card', card)
             
             if card[1] == leastSuit[0]:
                 return card
