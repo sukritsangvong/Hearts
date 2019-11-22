@@ -113,10 +113,6 @@ def giveSwaps(players, handCount):
         destinationPlayerIndex = players.index(player) + playerIndexChange
         destinationPlayerIndex = destinationPlayerIndex % 4
         destPlayer = players[destinationPlayerIndex]
-        if destinationPlayerIndex > 3:
-            destinationPlayerIndex -= 4
-        elif destinationPlayerIndex < 0:
-            destinationPlayerIndex += 4
         for swap in player.getSwaps():
             destPlayer.appendHand(swap)
         makeSortedHand(destPlayer)

@@ -44,23 +44,23 @@ def botSwap(hand):
                 if suit[suitIndex] != ['2', 'clubs']:
                     swapList.append(suit[suitIndex])
                 suitIndex += 1
-                    
+
+    orderedHand = orderHand(hand)                
     if ['Q', 'spades'] in spades and len(swapList) < 3:
             swapList.append(['Q', 'spades'])
-            spades.remove(['Q', 'spades'])
+            orderedHand.remove(['Q', 'spades'])
     if ['A', 'spades'] in spades and len(swapList) < 3:
             swapList.append(['A', 'spades'])
-            spades.remove(['A', 'spades'])
+            orderedHand.remove(['A', 'spades'])
     if ['K', 'spades'] in spades and len(swapList) < 3:
             swapList.append(['K', 'spades'])
-            spades.remove(['K', 'spades'])
+            orderedHand.remove(['K', 'spades'])
 
     for card in hearts:
         if values.index(card[0]) > 5 and card not in swapList \
             and len(swapList) < 3:
                 swapList.append(card)
 
-    orderedHand = orderHand(hand)
     for card in orderedHand:
         handIndex = 0
         while len(swapList) < 3:
