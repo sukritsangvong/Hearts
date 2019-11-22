@@ -26,7 +26,7 @@ def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
     
 
 
-def playable(players, numPlayer, identifyCard):
+def playable(players, numPlayer, identifyCard, firstTurn):
     #players = list of class of players
     #numPlayer = # of player that is currently playing (int)
     #identifyCard = card that the first player plays (list) ex. ['9', 'clubs']
@@ -117,7 +117,7 @@ def playable(players, numPlayer, identifyCard):
     
 
     else:
-        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard)
+        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn)
 
 
     #remove played card from hand

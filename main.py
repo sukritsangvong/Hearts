@@ -58,8 +58,10 @@ def main():
         updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
         players[indexOfNextPlayer].addScore(updateScore)
 
+        print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
             players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+            print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         
         #generate deck
         deck = createDeck()

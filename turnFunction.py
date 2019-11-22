@@ -18,6 +18,7 @@ def turn(players, numOfStartPlayer, firstTurn):
         listOfBoard = [['2', 'clubs']]
         turnLeft = 3
         addExtraTurn = 1
+
     
     for i in range(turnLeft):
         
@@ -25,22 +26,26 @@ def turn(players, numOfStartPlayer, firstTurn):
         
         if turnPlayer > 3:
             turnPlayer = turnPlayer % 4
+        
         print('****')
         print('Cards on the Board:', listOfBoard)
         print('****')
 
 
-        cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0])
+        cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0], firstTurn)
+
+
         
         if listOfBoard[0] == 'no card yet':
             listOfBoard = [cardPlayed]
         else:
             listOfBoard.append(cardPlayed)
 
-
         players[numPlayer].setHand(handLeft)
 
-            
+    print('****')
+    print('Cards on the Board:', listOfBoard)
+    print('****')
             
 
     indexFromStartPlayer = takeCardFromBoard(listOfBoard)
