@@ -62,7 +62,7 @@ def find2OfClubs(players):
             if hand[1][0] == ['2', 'clubs']:
                 return players.index(player)
         
-def cardSwap(players, handCount):       
+def cardSwap(players, handCount, clickZone, window):       
     #Choose the cards that you want to pass to another player
     #Doesn't swap any cards every 4th round
     if handCount == 1:
@@ -71,7 +71,7 @@ def cardSwap(players, handCount):
         direction = "to the right of"
     elif handCount == 3:
         direction = "across from"
-    elif handCount == 4:
+    elif handCount == 0:
         return players
     inputPrompt = "Choose 3 cards from your hand" \
                   "to give to the player " + direction + " you: "
@@ -79,7 +79,8 @@ def cardSwap(players, handCount):
         hand = player.getHand()
         hand = hand[0] + hand[1] + hand[2] + hand[3]
         if player == players[0]:    #get the card choices from the player
-            swapList = ['', '', '']
+            '''swapList = []
+            chosenCard = getCardName(selectCard(clickZone, window), hand)'''
             while len(swapList) != 3 or swapList[0] not in hand or \
                   swapList[1] not in hand or swapList[2] not in hand:
                 print("Current hand: ", hand)
@@ -94,8 +95,9 @@ def cardSwap(players, handCount):
                                 swapList[i] = card
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
-                            swapList[i] = card   
+                            swapList[i] = card  
         else:                       #get the card choices from the bots
+            #hand = hand[0] + hand[1] + hand[2] + hand[3]
             swapList = botSwap(hand)
 
         for swap in swapList:
@@ -113,7 +115,7 @@ def giveSwaps(players, handCount):
         playerIndexChange = 1
     elif handCount == 3:
         playerIndexChange = 2
-    elif handCount == 4:
+    elif handCount == 0:
         return players
     for player in players:
         destinationPlayerIndex = players.index(player) + playerIndexChange
