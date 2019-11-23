@@ -2,9 +2,10 @@
 from heartCard import *
 from playable import *
 from takeCardFromBoard import *
+from heartsBoard import *
+import time
 
-
-def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed):
+def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window):
     
     #firstPlayer = function to determine the first player
     firstPlayer = numOfStartPlayer
@@ -19,6 +20,8 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed):
         turnLeft = 3
         addExtraTurn = 1
 
+        drawSlotForCardsOnBoard(window, False, listOfBoard, False)
+        time.sleep(0.05)
     
     for i in range(turnLeft):
         
@@ -42,13 +45,23 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed):
             listOfBoard.append(cardPlayed)
 
         players[numPlayer].setHand(handLeft)
+        
 
+        drawSlotForCardsOnBoard(window, False, listOfBoard, False)
+        time.sleep(0.55)
+
+        
+            
+            
     for card in listOfBoard:
         if card[1] == 'hearts':
             isHeartPlayed = True
     print('****')
     print('Cards on the Board:', listOfBoard)
     print('****')
+
+    drawSlotForCardsOnBoard(window, True, None, False)
+    time.sleep(0.25)
             
 
     indexFromStartPlayer = takeCardFromBoard(listOfBoard)

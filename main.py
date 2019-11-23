@@ -5,7 +5,7 @@ from calculateScore import *
 from roundFunction import *
 from takeCardFromBoard import *
 from botswap import *
-
+from heartsBoard import *
 
       
 def main():
@@ -28,6 +28,10 @@ def main():
         assignHand(player,deck, 13)
         makeSortedHand(player)
 
+    window = setup()
+    player0Hand = players[0].getHand()
+
+    slotForCardOnHand(window, player0Hand)
 
 
     #test
@@ -44,6 +48,9 @@ def main():
         cardSwap(players,roundCount)
         giveSwaps(players,roundCount)
         
+        player0Hand = players[0].getHand()
+        slotForCardOnHand(window, player0Hand)
+        
         '''print("Player 1 : ", players[0].getHand())
         print("-----------")
         print("Player 2 : ", players[1].getHand())
@@ -55,11 +62,12 @@ def main():
 
         index2ofClubs = find2OfClubs(players)
 
-        players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False)
+        players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False, window)
 
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
-            players, indexOfNextPlayer, isHeartPlayed = turn(players, indexOfNextPlayer, False, isHeartPlayed)
+            players, indexOfNextPlayer, isHeartPlayed = turn(players, indexOfNextPlayer, False, isHeartPlayed, window)
+            drawSlotForCardsOnBoard(window, True, None, False)
             updateScore(players[indexOfNextPlayer])
             players[indexOfNextPlayer].clearGraveyard()
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
