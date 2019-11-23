@@ -156,8 +156,8 @@ def main():
     print("Player 4 : ", players[3].getHand())
     print("-----------")
 
-    cardSwap(players,1)
-    giveSwaps(players,1)
+    cardSwap(players,2)
+    giveSwaps(players,2)
 
    
     print("----AFTERRRRRRRRRRRR------")

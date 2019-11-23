@@ -63,7 +63,7 @@ def main():
         index2ofClubs = find2OfClubs(players)
 
         players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False, window)
-        
+
         if index2ofClubs == 0:
             player0Hand = players[0].getHand()
             slotForCardOnHand(window, player0Hand)
@@ -85,6 +85,7 @@ def main():
         #generate new deck
         deck = createDeck()
 
+        
         #give new hands
         for player in players:
             assignHand(player,deck, 13)
