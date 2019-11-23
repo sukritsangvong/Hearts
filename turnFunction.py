@@ -4,7 +4,7 @@ from playable import *
 from takeCardFromBoard import *
 
 
-def turn(players, numOfStartPlayer, firstTurn):
+def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed):
     
     #firstPlayer = function to determine the first player
     firstPlayer = numOfStartPlayer
@@ -32,7 +32,7 @@ def turn(players, numOfStartPlayer, firstTurn):
         print('****')
 
 
-        cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0], firstTurn)
+        cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0], firstTurn, isHeartPlayed, listOfBoard)
 
 
         
@@ -43,6 +43,9 @@ def turn(players, numOfStartPlayer, firstTurn):
 
         players[numPlayer].setHand(handLeft)
 
+    for card in listOfBoard:
+        if card[1] == 'hearts':
+            isHeartPlayed = True
     print('****')
     print('Cards on the Board:', listOfBoard)
     print('****')
@@ -52,7 +55,7 @@ def turn(players, numOfStartPlayer, firstTurn):
     indexOfNextPlayer = (numOfStartPlayer + indexFromStartPlayer) % 4
     players[indexOfNextPlayer].addGraveyard(listOfBoard)
 
-    return players, indexOfNextPlayer
+    return players, indexOfNextPlayer, isHeartPlayed
     
 #Note: need to add graveyard list after identifing who is taking the cards
 

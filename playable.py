@@ -26,7 +26,7 @@ def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
     
 
 
-def playable(players, numPlayer, identifyCard, firstTurn):
+def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfBoard):
     #players = list of class of players
     #numPlayer = # of player that is currently playing (int)
     #identifyCard = card that the first player plays (list) ex. ['9', 'clubs']
@@ -43,9 +43,17 @@ def playable(players, numPlayer, identifyCard, firstTurn):
     identifysuit = ''
     
     if identifyCard == 'no card yet':
-        handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
-        noMatchingSuit = True
-    
+        
+        if isHeartPlayed:
+            handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
+            noMatchingSuit = True
+        else:
+            handWithSameSuit = turnHand[1] + turnHand[2] + turnHand[3]
+            noMatchingSuit = True
+
+            if ['Q', 'spades'] in handWithSameSuit:
+                handWithSameSuit.remove(['Q', 'spades'])
+
     else:
         identifysuit = identifyCard[1]
     
@@ -65,12 +73,15 @@ def playable(players, numPlayer, identifyCard, firstTurn):
     
     #if no cards on hand match the suit on the board
     if handWithSameSuit == []:
-            for listOfSuits in turnHand:
-                if listOfSuits != []:
-                    handWithSameSuit = handWithSameSuit + listOfSuits
-
-                    noMatchingSuit = True
-
+        if not firstTurn:
+            handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
+            noMatchingSuit = True
+        else:
+            handWithSameSuit = turnHand[1] + turnHand[2] + turnHand[3]
+            noMatchingSuit = True
+            
+            if ['Q', 'spades'] in handWithSameSuit:
+                handWithSameSuit.remove(['Q', 'spades'])
 
 
 
@@ -117,7 +128,7 @@ def playable(players, numPlayer, identifyCard, firstTurn):
     
 
     else:
-        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn)
+        chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn, isHeartPlayed, listOfBoard)
 
 
     #remove played card from hand
