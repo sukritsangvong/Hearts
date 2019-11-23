@@ -162,13 +162,13 @@ def slotForCardOnHand(window, turnHand):
     backgroundPoly.setOutline(backgroundColor)
     backgroundPoly.setFill(backgroundColor)
     backgroundPoly.draw(window)
-    
+
     #______draw card boarder______
     slotForCardBoarderColor = color_rgb(66, 28, 82)
     
     #put all cards on hand in one list
     hand = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
-    
+
     if len(hand) != 0:
         amountHand = len(hand)
         amountOfHalfCard = len(hand) - 1
@@ -235,7 +235,9 @@ def slotForCardOnHand(window, turnHand):
             nameS.draw(window)
             nameS.setStyle("bold")
             suitCoorX += 50
-    return slotOfCard
+
+        return slotOfCard
+
 
 def selectCard(slotOfCard, window):
     click = window.getMouse()
