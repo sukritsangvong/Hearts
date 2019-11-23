@@ -67,7 +67,7 @@ def main():
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
             players, indexOfNextPlayer, isHeartPlayed = turn(players, indexOfNextPlayer, False, isHeartPlayed, window)
-            drawSlotForCardsOnBoard(window, True, None, False)
+            
             updateScore(players[indexOfNextPlayer])
             players[indexOfNextPlayer].clearGraveyard()
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
