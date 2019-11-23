@@ -41,6 +41,9 @@ class player:
     def addScore(self, score):
         self.score += score
 
+    def setScore(self, score):
+        self.score = score
+
     def getScore(self):
         return self.score
 
@@ -73,9 +76,10 @@ def createDeck():
 
 
 #This should be a player method
-def assignHand(self, deck, numberofCards):
+def assignHand(player, deck, numberofCards):
 
-    currentHand = self.getHand()
+    #currentHand = self.getHand()
+    currentHand = player.getHand()
     
     
     for individualHands in range(numberofCards):
@@ -92,7 +96,9 @@ def assignHand(self, deck, numberofCards):
         #add cards to hand
         currentHand.append(card)
         
-    return currentHand
+    #return currentHand
+    player.setHand(currentHand)
+    return player
 
       
 def main():

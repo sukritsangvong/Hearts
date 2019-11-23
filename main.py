@@ -31,7 +31,7 @@ def main():
     window = setup()
     player0Hand = players[0].getHand()
 
-    slotForCardOnHand(window, player0Hand)
+    clickZone = slotForCardOnHand(window, player0Hand)
 
 
     #test
@@ -43,13 +43,22 @@ def main():
     roundCount = 1
     while players[0].getScore != 100 or players[1].getScore != 100 \
         or players[2].getScore != 100 or players[3].getScore != 100 or Tie:
+
+        print("Player 1 : ", players[0].getHand())
+        print("-----------")
+        print("Player 2 : ", players[1].getHand())
+        print("-----------")
+        print("Player 3 : ", players[2].getHand())
+        print("-----------")
+        print("Player 4 : ", players[3].getHand())
+        print("-----------")
         
         roundCount = roundCount % 4
         cardSwap(players,roundCount)
         giveSwaps(players,roundCount)
         
         player0Hand = players[0].getHand()
-        slotForCardOnHand(window, player0Hand)
+        clickZone = slotForCardOnHand(window, player0Hand)
         
         '''print("Player 1 : ", players[0].getHand())
         print("-----------")
@@ -62,15 +71,24 @@ def main():
 
         index2ofClubs = find2OfClubs(players)
 
+<<<<<<< HEAD
         players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False, window)
 
+=======
+        players, indexOfNextPlayer, isHeartPlayed, clickZone = \
+                 turn(players, index2ofClubs, True, \
+                      False, window, clickZone)
+        
+>>>>>>> c3c32e00a73760544856e65ba79b0b75c834668e
         if index2ofClubs == 0:
             player0Hand = players[0].getHand()
-            slotForCardOnHand(window, player0Hand)
+            clickZone = slotForCardOnHand(window, player0Hand)
 
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
-            players, indexOfNextPlayer, isHeartPlayed = turn(players, indexOfNextPlayer, False, isHeartPlayed, window)
+            players, indexOfNextPlayer, isHeartPlayed, clickZone = \
+                     turn(players, indexOfNextPlayer, False, \
+                          isHeartPlayed, window, clickZone)
             
             updateScore(players[indexOfNextPlayer])
             players[indexOfNextPlayer].clearGraveyard()
@@ -81,15 +99,22 @@ def main():
             
             
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
-
+        scores = []
+        for player in players:
+            scores.append(player.getScore())
         #generate new deck
         deck = createDeck()
+<<<<<<< HEAD
 
         
+=======
+        players = generatePlayers()
+>>>>>>> c3c32e00a73760544856e65ba79b0b75c834668e
         #give new hands
         for player in players:
             assignHand(player,deck, 13)
             makeSortedHand(player)
+            player.setScore(scores[players.index(player)])
 
         #new round
         roundCount += 1
@@ -108,7 +133,9 @@ def main():
         if lowestScoreCount > 1:
             Tie = True
        
-            
+        player0Hand = players[0].getHand()
+        clickZone = slotForCardOnHand(window, player0Hand)
+        
     print("Game Over! Player", winningPlayerIndex + 1, "wins!")
 
 if __name__ == "__main__":
