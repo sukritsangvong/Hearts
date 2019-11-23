@@ -1,4 +1,5 @@
 from graphics import *
+import time
 
 def drawScoreBoxes(window):
     
@@ -361,6 +362,43 @@ def setup():
     return window
 
 
+def displayTextChooseCard(window, roundCount, delete):
+    if delete:
+        
+        backgroundColor = color_rgb(0, 102, 35)
+        
+        backgroundPoly = Polygon(Point(85, 108),
+                                 Point(820, 108),
+                                 Point(820, 132),
+                                 Point(85, 132))
+        backgroundPoly.setOutline(backgroundColor)
+        backgroundPoly.setFill(backgroundColor)
+        backgroundPoly.draw(window)
+
+    else:
+    
+        displayLRA = ['nope', 'to the left of', 'to the right of', 'across from']
+
+        displayCoor = Point(450, 120)
+        
+        if displayLRA[roundCount] == 'nope':
+
+            
+            displayLRA = Text(displayCoor, 'No Swapping This Turn')
+
+
+        else:
+            textOn = displayLRA[roundCount]
+            displayLRA = Text(displayCoor, 'Choose 3 cards from your hand to give to the player '\
+                              + textOn + ' you: ')
+
+        setColor = color_rgb(255, 255, 255)
+        displayLRA.setTextColor(setColor)
+        displayLRA.setSize(23)
+        displayLRA.draw(window)
+
+
+
 def main():
     # Open the window
     windowWidth = 900
@@ -378,16 +416,27 @@ def main():
     drawScoreBoxes(window)
     drawSlotForCardsOnBoard(window, True, [['10', 'hearts']], False)
     s = input('Hit Enter to quit')
-    drawSlotForCardsOnBoard(window, False, [['10', 'hearts']], False)
-    s = input('Hit Enter to quit')
-    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts']], False)
-    s = input('Hit Enter to quit')
-    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts']], False)
-    s = input('Hit Enter to quit')
-    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts'], ['4', 'spade']], False)
+#    drawSlotForCardsOnBoard(window, False, [['10', 'hearts']], False)
+#    s = input('Hit Enter to quit')
+#    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts']], False)
+#    s = input('Hit Enter to quit')
+#    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts']], False)
+#    s = input('Hit Enter to quit')
+#    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts'], ['4', 'spade']], False)
     score(window, True, True, True)
+    
+    displayTextChooseCard(window, 0)
 
-    s = input('Hit Enter to quit')
+#    s = input('Hit Enter to quit')
+    displayTextChooseCard(window, 1)
+    
+#    s = input('Hit Enter to quit')
+    displayTextChooseCard(window, 2)
+            
+#    s = input('Hit Enter to quit')
+    displayTextChooseCard(window, 3)
+                    
+#    s = input('Hit Enter to quit')
     turnHand = [[], [['4', 'clubs'], ['9', 'clubs'], ['10', 'clubs'], ['A', 'clubs']], [['9', 'diamonds']], [['2', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
     cardIndex = selectCard(slotForCardOnHand(window, turnHand), window)
     print(getCardName(cardIndex, turnHand))

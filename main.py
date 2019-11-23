@@ -56,9 +56,15 @@ def main():
         
         roundCount = roundCount % 4
 
+        displayTextChooseCard(window, roundCount, False)
+        
         cardSwap(players,roundCount, clickZone, window)
 
         giveSwaps(players,roundCount)
+        
+        displayTextChooseCard(window, roundCount, True)
+
+
         
         player0Hand = players[0].getHand()
         clickZone = slotForCardOnHand(window, player0Hand)
