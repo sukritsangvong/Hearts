@@ -234,9 +234,38 @@ def slotForCardOnHand(window, turnHand):
         nameS.draw(window)
         nameS.setStyle("bold")
         suitCoorX += 50
+    return slotOfCard
 
+def selectCard(slotOfCard, window):
+    click = window.getMouse()
+    for card in slotOfCard:
+        x1 = card.getPoints()[0].getX()
+        x2 = card.getPoints()[1].getX()
+        y1 = card.getPoints()[0].getY()
+        y2 = card.getPoints()[2].getY()
+        if click.getX() > x1 and click.getX() < x2 and \
+           click.getY() > y1 and click.getY() < y2:
+            return slotOfCard.index(card)
+    return selectCard(slotOfCard, window)
 
-
+def getCardName(cardClickIndex, hand):
+    '''given the index of the card that was clicked on in the window, returns
+    that card'''
+    values = []
+    suits = []
+    hand = hand[0] + hand[1] + hand[2] + hand[3]
+    for card in hand:
+        values.append(card[0])
+        suits.append(card[1])
+    value = values[cardClickIndex]
+    suit = suits[cardClickIndex]
+    for card in hand:
+        if card[0] == value and card[1] == suit:
+            return card
+            
+        
+    
+    
 
 
 
@@ -343,13 +372,14 @@ def main():
     s = input('Hit Enter to quit')
     drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts'], ['4', 'spade']], False)
     score(window, True, True, True)
-    slotForCardOnHand(window, turnHand)
 
     s = input('Hit Enter to quit')
     turnHand = [[], [['4', 'clubs'], ['9', 'clubs'], ['10', 'clubs'], ['A', 'clubs']], [['9', 'diamonds']], [['2', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
-    slotForCardOnHand(window, turnHand)
+    cardIndex = selectCard(slotForCardOnHand(window, turnHand), window)
+    print(getCardName(cardIndex, turnHand))
     # Wait for user input.
     s = input('Hit Enter to quit')
+    
 
 if __name__ == "__main__":
     main()

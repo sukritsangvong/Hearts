@@ -68,15 +68,15 @@ def cardSwap(players, handCount):
         direction = "across from"
     elif handCount == 4:
         return players
-    inputPrompt = "Choose 3 cards from your hand (in format 'Ah 8s 10c')" \
+    inputPrompt = "Choose 3 cards from your hand" \
                   "to give to the player " + direction + " you: "
     for player in players:
         hand = player.getHand()
         hand = hand[0] + hand[1] + hand[2] + hand[3]
         if player == players[0]:    #get the card choices from the player
             swapList = ['', '', '']
-            while swapList[0] not in hand or swapList[1] not in hand or \
-                swapList[2] not in hand or len(swapList) != 3:
+            while len(swapList) != 3 or swapList[0] not in hand or \
+                  swapList[1] not in hand or swapList[2] not in hand:
                 print("Current hand: ", hand)
                 swapList = input(inputPrompt).split(' ')
                 for i in range(len(swapList)):
@@ -100,8 +100,8 @@ def cardSwap(players, handCount):
     return players
 
 def giveSwaps(players, handCount):
-    #Give swapped cards to the target player
-    #CAN ONLY BE USED AFTER cardSwap is RUN!
+    '''Give the chosen cards to be swapped to the target player.
+    CAN ONLY BE USED AFTER cardSwap IS RUN!'''
     if handCount == 1:
         playerIndexChange = -1
     elif handCount == 2:
