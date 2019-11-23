@@ -44,7 +44,9 @@ def main():
     while (players[0].getScore() < 20 and players[1].getScore() < 20 \
         and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie:
 
-        print("dass", players[0].getScore())
+        
+        print((players[0].getScore() < 20 and players[1].getScore() < 20 \
+               and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie)
         print("Player 1 : ", players[0].getHand())
         print("-----------")
         print("Player 2 : ", players[1].getHand())
@@ -122,7 +124,7 @@ def main():
 
         #determining if there is a tie at end of round
         winningPlayerIndex = 0
-        lowestScore = 100
+        lowestScore = 20
         for player in players:  
             if player.getScore() < lowestScore:
                 lowestScore = player.getScore()
@@ -133,6 +135,8 @@ def main():
                 winningPlayerIndex = players.index(player)
         if lowestScoreCount > 1:
             Tie = True
+        else:
+            Tie = False
        
         player0Hand = players[0].getHand()
         clickZone = slotForCardOnHand(window, player0Hand)
