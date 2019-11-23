@@ -93,6 +93,7 @@ def cardSwap(players, handCount):
                             swapList[i] = card   
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
+
         for swap in swapList:
             hand.remove(swap)
         player.setHand(hand)
