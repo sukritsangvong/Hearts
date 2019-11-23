@@ -39,7 +39,7 @@ class player:
         return self.swaps
 
     def addScore(self, score):
-        self.score =+ score
+        self.score += score
 
     def getScore(self):
         return self.score
@@ -50,6 +50,9 @@ class player:
     def addGraveyard(self, listOfCollecetedCards):
         self.graveyard += listOfCollecetedCards
         return self.graveyard
+
+    def clearGraveyard(self):
+        self.graveyard = []
 
     def removeHand2Clubs(self):
         self.getHand()[1].remove(['2', 'clubs'])

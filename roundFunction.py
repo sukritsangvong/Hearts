@@ -93,8 +93,6 @@ def cardSwap(players, handCount):
                             swapList[i] = card   
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
-        print("SWAPLIST:", swapList)
-        print("HAND:", hand)
         for swap in swapList:
             hand.remove(swap)
         player.setHand(hand)
@@ -125,14 +123,14 @@ def giveSwaps(players, handCount):
 def updateScore(player):
     #This function will need to run at the end of every round,
     #ie, every 4th turn starting on the 4th turn
-    score = player.getScore()
+    score = 0
     graveyard = player.getGraveyard()
     for card in graveyard:
-        if card[1][0] == 'h':
+        if card[1] == 'hearts':
             score += 1
         elif card == ['Q', 'spades']:
             score += 13
-    player.setScore(score)
+    player.addScore(score)
     return player
     
 
