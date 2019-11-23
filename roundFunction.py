@@ -82,6 +82,8 @@ def cardSwap(players, handCount):
                 swapList = input(inputPrompt).split(' ')
                 for i in range(len(swapList)):
                     swap = swapList[i]
+                    if swap in swapList[:i] or swap in swapList[i+1:]:
+                        swapList = ['', '', '']
                     for card in hand:
                         if len(swap) == 3:    #if the card to be swapped is a 10
                             if card[0] == '10' and card[1][0] == str(swap[2]):
@@ -91,7 +93,8 @@ def cardSwap(players, handCount):
                             swapList[i] = card   
         else:                       #get the card choices from the bots
             swapList = botSwap(hand)
-
+        print("SWAPLIST:", swapList)
+        print("HAND:", hand)
         for swap in swapList:
             hand.remove(swap)
         player.setHand(hand)
@@ -119,10 +122,11 @@ def giveSwaps(players, handCount):
     return players    
 
            
-def updateScore(player, graveyard):
+def updateScore(player):
     #This function will need to run at the end of every round,
     #ie, every 4th turn starting on the 4th turn
     score = player.getScore()
+    graveyard = player.getGraveyard()
     for card in graveyard:
         if card[1][0] == 'h':
             score += 1

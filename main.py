@@ -54,13 +54,15 @@ def main():
         print("-----------")
 
         index2ofClubs = find2OfClubs(players)
-        players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False)
-        updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
-        players[indexOfNextPlayer].addScore(updateScore)
+
+        players, indexOfNextPlayer = turn(players, index2ofClubs, True)
 
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
-            players, indexOfNextPlayer, isHeartPlayed = turn(players, indexOfNextPlayer, False, isHeartPlayed)
+            players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+            updateScore = updateScore(players[indexOfNextPlayer])
+            players[indexOfNextPlayer].addScore(updateScore)
+
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         
         #generate deck
