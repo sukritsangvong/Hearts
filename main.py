@@ -54,7 +54,7 @@ def main():
         print("-----------")
         
         roundCount = roundCount % 4
-        cardSwap(players,roundCount)
+        cardSwap(players,roundCount, clickZone, window)
         giveSwaps(players,roundCount)
         
         player0Hand = players[0].getHand()
