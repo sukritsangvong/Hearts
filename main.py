@@ -68,7 +68,7 @@ def main():
         deck = createDeck()
 
         #generate players
-        players = generatePlayers()
+        #players = generatePlayers()
     
     
         #hand out the starting cards --> mutate the list of cards
