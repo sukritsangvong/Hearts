@@ -63,6 +63,10 @@ def main():
         index2ofClubs = find2OfClubs(players)
 
         players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False, window)
+        
+        if index2ofClubs == 0:
+            player0Hand = players[0].getHand()
+            slotForCardOnHand(window, player0Hand)
 
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
@@ -70,6 +74,12 @@ def main():
             
             updateScore(players[indexOfNextPlayer])
             players[indexOfNextPlayer].clearGraveyard()
+            playerScore = players[indexOfNextPlayer].getScore()
+            
+            score(window, playerScore, indexOfNextPlayer, False)
+            
+            
+            
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
 
         #generate new deck

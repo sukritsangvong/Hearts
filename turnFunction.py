@@ -45,6 +45,10 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window):
             listOfBoard.append(cardPlayed)
 
         players[numPlayer].setHand(handLeft)
+
+        if numPlayer == 0:
+            player0Hand = players[0].getHand()
+            slotForCardOnHand(window, player0Hand)
         
 
         drawSlotForCardsOnBoard(window, False, listOfBoard, False)
@@ -60,6 +64,7 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window):
     print('Cards on the Board:', listOfBoard)
     print('****')
 
+    time.sleep(0.50)
     drawSlotForCardsOnBoard(window, True, None, False)
     time.sleep(0.25)
             
