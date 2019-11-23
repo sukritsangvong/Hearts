@@ -64,6 +64,18 @@ def drawScoreBoxes(window):
 def drawSlotForCardsOnBoard(window, setup, cardsOnBoard, cardPlayed):
    
     if setup:
+        #reset background
+        backgroundColor = color_rgb(0, 102, 35)
+        
+        backgroundPoly = Polygon(Point(200, 185),
+                                 Point(690, 185),
+                                 Point(690, 340),
+                                 Point(200, 340))
+        backgroundPoly.setOutline(backgroundColor)
+        backgroundPoly.setFill(backgroundColor)
+        backgroundPoly.draw(window)
+
+
         slotForCardBoarderColor = color_rgb(66, 28, 82)
 
         slot1 = Polygon(Point(220, 195), Point(320, 195),
@@ -98,18 +110,6 @@ def drawSlotForCardsOnBoard(window, setup, cardsOnBoard, cardPlayed):
 
     else:
         if cardsOnBoard != ['no card yet']:
-           #_______set background_________
-        
-            backgroundColor = color_rgb(0, 102, 35)
-            
-            backgroundPoly = Polygon(Point(200, 200),
-                                     Point(330, 200),
-                                     Point(330, 340),
-                                     Point(200, 340))
-            backgroundPoly.setOutline(backgroundColor)
-            backgroundPoly.setFill(backgroundColor)
-            backgroundPoly.draw(window)
-            
             # draw boarder
             drawSlotForCardsOnBoard(window, True, cardsOnBoard, True)
             
@@ -342,9 +342,20 @@ def score(window, score, numPlayer, setup):
         setScore.draw(window)
 
 
+def setup():
 
+    windowWidth = 900
+    windowHeight  = 500
+    window = GraphWin('Hearts Board', windowWidth, windowHeight)
+    backgroundColor = color_rgb(0, 102, 35)
+    window.setBackground(backgroundColor)
+    
+    score(window, True, True, True)
+
+    drawScoreBoxes(window)
+    drawSlotForCardsOnBoard(window, True, None, False)
         
-
+    return window
 
 
 def main():
