@@ -51,8 +51,7 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
             handWithSameSuit = turnHand[1] + turnHand[2] + turnHand[3]
             noMatchingSuit = True
 
-            if ['Q', 'spades'] in handWithSameSuit:
-                handWithSameSuit.remove(['Q', 'spades'])
+            
 
     else:
         identifysuit = identifyCard[1]
