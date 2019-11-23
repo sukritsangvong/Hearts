@@ -46,13 +46,16 @@ def botSwap(hand):
                 suitIndex += 1
 
     orderedHand = orderHand(hand)                
-    if ['Q', 'spades'] in spades and len(swapList) < 3:
+    if ['Q', 'spades'] in spades and len(swapList) < 3 and \
+       ['Q', 'spades'] not in swapList:
             swapList.append(['Q', 'spades'])
             orderedHand.remove(['Q', 'spades'])
-    if ['A', 'spades'] in spades and len(swapList) < 3:
+    if ['A', 'spades'] in spades and len(swapList) < 3 and \
+       ['A', 'spades'] not in swapList:
             swapList.append(['A', 'spades'])
             orderedHand.remove(['A', 'spades'])
-    if ['K', 'spades'] in spades and len(swapList) < 3:
+    if ['K', 'spades'] in spades and len(swapList) < 3 and \
+       ['K', 'spades'] not in swapList:
             swapList.append(['K', 'spades'])
             orderedHand.remove(['K', 'spades'])
 

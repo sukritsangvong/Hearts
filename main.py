@@ -55,12 +55,12 @@ def main():
 
         index2ofClubs = find2OfClubs(players)
         players, indexOfNextPlayer = turn(players, index2ofClubs, True)
-        updateScore = calculateScore(players[indexOfNextPlayer].getGraveyard())
-        players[indexOfNextPlayer].addScore(updateScore)
 
         print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         while players[0].getHand() != [[],[],[],[]]:
             players, indexOfNextPlayer = turn(players, indexOfNextPlayer, False)
+            updateScore = updateScore(players[indexOfNextPlayer])
+            players[indexOfNextPlayer].addScore(updateScore)
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
         
         #generate deck
