@@ -3,6 +3,7 @@
 
 from heartCard import *
 from botswap import *
+from heartsBoard import *
 
 #First, collect each suit into a distinct list   
 def sortSuits(hand, suit):
@@ -73,15 +74,22 @@ def cardSwap(players, handCount, clickZone, window):
         direction = "across from"
     elif handCount == 0:
         return players
-    inputPrompt = "Choose 3 cards from your hand" \
+    inputPrompt = "Choose 3 cards from your hand " \
                   "to give to the player " + direction + " you: "
     for player in players:
         hand = player.getHand()
-        hand = hand[0] + hand[1] + hand[2] + hand[3]
         if player == players[0]:    #get the card choices from the player
-            '''swapList = []
-            chosenCard = getCardName(selectCard(clickZone, window), hand)'''
-            while len(swapList) != 3 or swapList[0] not in hand or \
+            swapList = []
+            print(inputPrompt)
+            while len(swapList) < 3:
+                chosenCard = getCardName(selectCard(clickZone, window), hand)
+                if chosenCard not in swapList:
+                    swapList.append(chosenCard)
+                    print("Current swaps:", swapList)
+                else:
+                    print("Please pick a different card")
+            hand = hand[0] + hand[1] + hand[2] + hand[3]
+            '''while len(swapList) != 3 or swapList[0] not in hand or \
                   swapList[1] not in hand or swapList[2] not in hand:
                 print("Current hand: ", hand)
                 swapList = input(inputPrompt).split(' ')
@@ -95,9 +103,9 @@ def cardSwap(players, handCount, clickZone, window):
                                 swapList[i] = card
                         elif len(swap) == 2 and str(swap[0]) == card[0] \
                                             and str(swap[1]) == card[1][0]:
-                            swapList[i] = card  
+                            swapList[i] = card'''
         else:                       #get the card choices from the bots
-            #hand = hand[0] + hand[1] + hand[2] + hand[3]
+            hand = hand[0] + hand[1] + hand[2] + hand[3]
             swapList = botSwap(hand)
 
         for swap in swapList:

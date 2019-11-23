@@ -162,79 +162,80 @@ def slotForCardOnHand(window, turnHand):
     backgroundPoly.setOutline(backgroundColor)
     backgroundPoly.setFill(backgroundColor)
     backgroundPoly.draw(window)
-    
+
     #______draw card boarder______
     slotForCardBoarderColor = color_rgb(66, 28, 82)
     
     #put all cards on hand in one list
     hand = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
-    
-    amountHand = len(hand)
-    amountOfHalfCard = len(hand) - 1
-    amountFrom13 = 13 - len(hand)
-    
-    slotOfCard = []
-    firstCornerX, firstCornerY = 100 + 25 * (amountFrom13) , 429
-    secondCornerX, secondCornerY = firstCornerX + 50, 499
-    
-    rememberFirstCornerX = firstCornerX
-    
-    
-    
-    for i in range(amountOfHalfCard):
-    
-        cardShow = Polygon(Point(firstCornerX, firstCornerY),
-                           Point(secondCornerX, firstCornerY),
-                           Point(secondCornerX, secondCornerY),
-                           Point(firstCornerX, secondCornerY))
-                           
-        slotOfCard.append(cardShow)
+
+    if len(hand) != 0:
+        amountHand = len(hand)
+        amountOfHalfCard = len(hand) - 1
+        amountFrom13 = 13 - len(hand)
         
-        firstCornerX += 50
-        secondCornerX = firstCornerX + 50
+        slotOfCard = []
+        firstCornerX, firstCornerY = 100 + 25 * (amountFrom13) , 429
+        secondCornerX, secondCornerY = firstCornerX + 50, 499
+        
+        rememberFirstCornerX = firstCornerX
+        
+        
+        
+        for i in range(amountOfHalfCard):
+        
+            cardShow = Polygon(Point(firstCornerX, firstCornerY),
+                               Point(secondCornerX, firstCornerY),
+                               Point(secondCornerX, secondCornerY),
+                               Point(firstCornerX, secondCornerY))
+                               
+            slotOfCard.append(cardShow)
+            
+            firstCornerX += 50
+            secondCornerX = firstCornerX + 50
 
-    lastCardShow = Polygon(Point(firstCornerX, firstCornerY),
-                           Point(secondCornerX + 50, firstCornerY),
-                           Point(secondCornerX + 50, secondCornerY),
-                           Point(firstCornerX, secondCornerY))
-                           
-    slotOfCard.append(lastCardShow)
+        lastCardShow = Polygon(Point(firstCornerX, firstCornerY),
+                               Point(secondCornerX + 50, firstCornerY),
+                               Point(secondCornerX + 50, secondCornerY),
+                               Point(firstCornerX, secondCornerY))
+                               
+        slotOfCard.append(lastCardShow)
 
 
-    for card in slotOfCard:
-        card.setFill("white")
-        card.setOutline(slotForCardBoarderColor)
-        card.draw(window)
+        for card in slotOfCard:
+            card.setFill("white")
+            card.setOutline(slotForCardBoarderColor)
+            card.draw(window)
 
-#--------------------- putting values on cards -----------------------
-    valueOfCard = []
-    suitOfCard = []
-    nameColor = color_rgb(0, 0, 0)
-    valueCoorX = rememberFirstCornerX + 12
-    valueCoorY = firstCornerY + 17
-    suitCoorX = rememberFirstCornerX + 27
-    suitCoorY = firstCornerY + 17
+    #--------------------- putting values on cards -----------------------
+        valueOfCard = []
+        suitOfCard = []
+        nameColor = color_rgb(0, 0, 0)
+        valueCoorX = rememberFirstCornerX + 12
+        valueCoorY = firstCornerY + 17
+        suitCoorX = rememberFirstCornerX + 27
+        suitCoorY = firstCornerY + 17
 
-    for card in hand:
-        valueOfCard.append(card[0])
-        suitOfCard.append(card[1])
+        for card in hand:
+            valueOfCard.append(card[0])
+            suitOfCard.append(card[1])
 
-    for value in valueOfCard:
-        nameV = Text(Point(valueCoorX, valueCoorY), value)
-        nameV.setTextColor(nameColor)
-        nameV.setSize(13)
-        nameV.draw(window)
-        nameV.setStyle("bold")
-        valueCoorX += 50
+        for value in valueOfCard:
+            nameV = Text(Point(valueCoorX, valueCoorY), value)
+            nameV.setTextColor(nameColor)
+            nameV.setSize(13)
+            nameV.draw(window)
+            nameV.setStyle("bold")
+            valueCoorX += 50
 
-    for suit in suitOfCard:
-        nameS = Text(Point(suitCoorX, suitCoorY), suit[0].upper())
-        nameS.setTextColor(nameColor)
-        nameS.setSize(13)
-        nameS.draw(window)
-        nameS.setStyle("bold")
-        suitCoorX += 50
-    return slotOfCard
+        for suit in suitOfCard:
+            nameS = Text(Point(suitCoorX, suitCoorY), suit[0].upper())
+            nameS.setTextColor(nameColor)
+            nameS.setSize(13)
+            nameS.draw(window)
+            nameS.setStyle("bold")
+            suitCoorX += 50
+        return slotOfCard
 
 def selectCard(slotOfCard, window):
     click = window.getMouse()

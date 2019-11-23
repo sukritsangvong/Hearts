@@ -41,9 +41,10 @@ def main():
 #    players[3].setHand([[['6', 'hearts']],[['8', 'clubs'],['J', 'clubs']],[], []])
     Tie = False
     roundCount = 1
-    while players[0].getScore != 100 or players[1].getScore != 100 \
-        or players[2].getScore != 100 or players[3].getScore != 100 or Tie:
+    while (players[0].getScore() < 20 and players[1].getScore() < 20 \
+        and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie:
 
+        print("dass", players[0].getScore())
         print("Player 1 : ", players[0].getHand())
         print("-----------")
         print("Player 2 : ", players[1].getHand())
@@ -54,7 +55,7 @@ def main():
         print("-----------")
         
         roundCount = roundCount % 4
-        cardSwap(players,roundCount)
+        cardSwap(players,roundCount,clickZone,window)
         giveSwaps(players,roundCount)
         
         player0Hand = players[0].getHand()
