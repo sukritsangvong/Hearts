@@ -61,37 +61,109 @@ def drawScoreBoxes(window):
     nameBot3.draw(window)
 
 
-def drawSlotForCardsOnBoard(window):
-    
-    slotForCardBoarderColor = color_rgb(66, 28, 82)
+def drawSlotForCardsOnBoard(window, setup, cardsOnBoard, cardPlayed):
+   
+    if setup:
+        slotForCardBoarderColor = color_rgb(66, 28, 82)
+
+        slot1 = Polygon(Point(220, 195), Point(320, 195),
+                          Point(320, 335), Point(220, 335))
+
+        slot2 = Polygon(Point(340, 195), Point(440, 195),
+                           Point(440, 335), Point(340, 335))
+
+        slot3 = Polygon(Point(460, 195), Point(560, 195),
+                            Point(560, 335), Point(460, 335))
+                    
+        slot4 = Polygon(Point(580, 195), Point(680, 195),
+                            Point(680, 335), Point(580, 335))
+
+        slot1.setOutline(slotForCardBoarderColor)
+        slot2.setOutline(slotForCardBoarderColor)
+        slot3.setOutline(slotForCardBoarderColor)
+        slot4.setOutline(slotForCardBoarderColor)
+       
+        if cardPlayed:
+            slots = [slot1, slot2, slot3, slot4]
+            
+            if cardsOnBoard != ['no card yet']:
+                for i in range(len(cardsOnBoard)):
+                    slots[i].setFill('white')
 
 
-    slot1 = Polygon(Point(220, 195), Point(320, 195),
-                      Point(320, 335), Point(220, 335))
+        slot1.draw(window)
+        slot2.draw(window)
+        slot3.draw(window)
+        slot4.draw(window)
 
-    slot2 = Polygon(Point(340, 195), Point(440, 195),
-                       Point(440, 335), Point(340, 335))
+    else:
+        if cardsOnBoard != ['no card yet']:
+           #_______set background_________
+        
+            backgroundColor = color_rgb(0, 102, 35)
+            
+            backgroundPoly = Polygon(Point(200, 200),
+                                     Point(330, 200),
+                                     Point(330, 340),
+                                     Point(200, 340))
+            backgroundPoly.setOutline(backgroundColor)
+            backgroundPoly.setFill(backgroundColor)
+            backgroundPoly.draw(window)
+            
+            # draw boarder
+            drawSlotForCardsOnBoard(window, True, cardsOnBoard, True)
+            
+            #put value in it
+            valueOfCard = []
+            suitOfCard = []
+            nameColor = color_rgb(0, 0, 0)
+            valueCoorX = 220 + 12
+            valueCoorY = 195 + 17
+            suitCoorX = 220 + 25
+            suitCoorY = 195 + 17
+        
+            for card in cardsOnBoard:
+                valueOfCard.append(card[0])
+                suitOfCard.append(card[1])
 
-    slot3 = Polygon(Point(460, 195), Point(560, 195),
-                        Point(560, 335), Point(460, 335))
-                
-    slot4 = Polygon(Point(580, 195), Point(680, 195),
-                        Point(680, 335), Point(580, 335))
+            for value in valueOfCard:
+                nameV = Text(Point(valueCoorX, valueCoorY), value)
+                nameV.setTextColor(nameColor)
+                nameV.setSize(13)
+                nameV.draw(window)
+                nameV.setStyle("bold")
+                valueCoorX += 120
+        
+            for suit in suitOfCard:
+                nameS = Text(Point(suitCoorX, suitCoorY), suit[0].upper())
+                nameS.setTextColor(nameColor)
+                nameS.setSize(13)
+                nameS.draw(window)
+                nameS.setStyle("bold")
+                suitCoorX += 120
 
-    slot1.setOutline(slotForCardBoarderColor)
-    slot2.setOutline(slotForCardBoarderColor)
-    slot3.setOutline(slotForCardBoarderColor)
-    slot4.setOutline(slotForCardBoarderColor)
 
-    slot1.draw(window)
-    slot2.draw(window)
-    slot3.draw(window)
-    slot4.draw(window)
+
+
+
+
 
 
 # All the functions are defined.  Now start doing stuff.
 def slotForCardOnHand(window, turnHand):
+    #_______set background_________
 
+    backgroundColor = color_rgb(0, 102, 35)
+    
+    backgroundPoly = Polygon(Point(0, 429),
+                             Point(899, 429),
+                             Point(899, 499),
+                             Point(0,499))
+    backgroundPoly.setOutline(backgroundColor)
+    backgroundPoly.setFill(backgroundColor)
+    backgroundPoly.draw(window)
+    
+    #______draw card boarder______
     slotForCardBoarderColor = color_rgb(66, 28, 82)
     
     #put all cards on hand in one list
@@ -111,8 +183,11 @@ def slotForCardOnHand(window, turnHand):
     
     for i in range(amountOfHalfCard):
     
-        cardShow = Polygon(Point(firstCornerX, firstCornerY), Point(secondCornerX, firstCornerY),
-                           Point(secondCornerX, secondCornerY), Point(firstCornerX, secondCornerY))
+        cardShow = Polygon(Point(firstCornerX, firstCornerY),
+                           Point(secondCornerX, firstCornerY),
+                           Point(secondCornerX, secondCornerY),
+                           Point(firstCornerX, secondCornerY))
+                           
         slotOfCard.append(cardShow)
         
         firstCornerX += 50
@@ -127,35 +202,43 @@ def slotForCardOnHand(window, turnHand):
 
 
     for card in slotOfCard:
-
+        card.setFill("white")
         card.setOutline(slotForCardBoarderColor)
         card.draw(window)
 
 #--------------------- putting values on cards -----------------------
     valueOfCard = []
     suitOfCard = []
-    nameColor = color_rgb(255, 255, 255)
-    valueCoorX =
-    valueCoorY =
-    suitCoorX =
-    suitCoorY =
+    nameColor = color_rgb(0, 0, 0)
+    valueCoorX = rememberFirstCornerX + 12
+    valueCoorY = firstCornerY + 17
+    suitCoorX = rememberFirstCornerX + 25
+    suitCoorY = firstCornerY + 17
 
     for card in hand:
         valueOfCard.append(card[0])
         suitOfCard.append(card[1])
-
 
     for value in valueOfCard:
         nameV = Text(Point(valueCoorX, valueCoorY), value)
         nameV.setTextColor(nameColor)
         nameV.setSize(13)
         nameV.draw(window)
+        nameV.setStyle("bold")
+        valueCoorX += 50
 
     for suit in suitOfCard:
-        nameS = Text(Point(suitCoorX, suitCoorY), value)
+        nameS = Text(Point(suitCoorX, suitCoorY), suit[0].upper())
         nameS.setTextColor(nameColor)
         nameS.setSize(13)
         nameS.draw(window)
+        nameS.setStyle("bold")
+        suitCoorX += 50
+
+
+
+
+
 
 
 
@@ -248,12 +331,23 @@ def main():
     #drawSomeCircles(window, 100)
     #sayHello(window, 100, windowHeight - 100)
     #sayHelloAgain(window, windowWidth - 250, windowHeight - 100)
-    turnHand = [[], [], [['9', 'diamonds']], [['2', 'spades'], ['4', 'spades'], ['7', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
+    turnHand = [[['10', 'hearts'],['A', 'hearts']], [['4', 'clubs'], ['9', 'clubs'], ['10', 'clubs'], ['A', 'clubs']], [['9', 'diamonds']], [['2', 'spades'], ['4', 'spades'], ['7', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
     drawScoreBoxes(window)
-    drawSlotForCardsOnBoard(window)
+    drawSlotForCardsOnBoard(window, True, [['10', 'hearts']], False)
+    s = input('Hit Enter to quit')
+    drawSlotForCardsOnBoard(window, False, [['10', 'hearts']], False)
+    s = input('Hit Enter to quit')
+    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts']], False)
+    s = input('Hit Enter to quit')
+    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts']], False)
+    s = input('Hit Enter to quit')
+    drawSlotForCardsOnBoard(window, False, [['10', 'hearts'],['A', 'hearts'], ['K', 'hearts'], ['4', 'spade']], False)
     score(window, True, True, True)
     slotForCardOnHand(window, turnHand)
 
+    s = input('Hit Enter to quit')
+    turnHand = [[], [['4', 'clubs'], ['9', 'clubs'], ['10', 'clubs'], ['A', 'clubs']], [['9', 'diamonds']], [['2', 'spades'], ['8', 'spades'], ['J', 'spades'], ['A', 'spades']]]
+    slotForCardOnHand(window, turnHand)
     # Wait for user input.
     s = input('Hit Enter to quit')
 
