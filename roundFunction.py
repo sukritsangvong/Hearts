@@ -36,6 +36,8 @@ def sortByMin(suitList):
     for i in range(len(suitList)):
         minCard = findMinCard(suitList, 0)
         orderedSuit.append(minCard)
+        #print(minCard)
+        #print(suitList)
         suitList.remove(minCard)
     return orderedSuit
 
@@ -45,9 +47,12 @@ def makeSortedHand(player):
     sortedHand = []
     for suit in ['h', 'c', 'd', 's']:
         suitList = sortSuits(hand, suit)
+        #print("---------SUITS----------")
+        #print(suitList)
         orderedSuit = sortByMin(suitList)
         sortedHand.append(orderedSuit)
     player.setHand(sortedHand)
+    #return player
 
 def find2OfClubs(players):
     '''Finds the player who has the 2 of clubs'''

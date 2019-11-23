@@ -2,6 +2,7 @@ from heartCard import *
 from roundFunction import *
 from botPickCard import *
 from botswap import *
+from heartsBoard import *
 
 # might make this function to make code look a bit shorter later
 def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
@@ -26,7 +27,7 @@ def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
     
 
 
-def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfBoard):
+def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfBoard, clickZone, window):
     #players = list of class of players
     #numPlayer = # of player that is currently playing (int)
     #identifyCard = card that the first player plays (list) ex. ['9', 'clubs']
@@ -100,31 +101,12 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
         chosenCard = ''
 
         while checkPlayCard != "match":
-            
-            if noMatchingSuit:
-                suitOfPlayCard = ''
-                while not suitOfPlayCard in [ 'h', 'c', 'd', 's']:
-                    suitOfPlayCard = str(input("Type in the first letter(h,c,d,s) of suit that you want to play: "))
-
-                playCard = ''
-                while not playCard in [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
-                    playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
-            
-                chosenCard, checkPlayCard = askForCard(handWithSameSuit, playCard, suitOfPlayCard, True)
-                if checkPlayCard != "match":
-                    print("Found no matched card \nTry Again!")
-
-
+            chosenCard = getCardName(selectCard(clickZone, window), turnHand)
+            if chosenCard in handWithSameSuit:
+                checkPlayCard = "match"
             else:
-                
-                playCard = ''
-                while not playCard in [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
-                    playCard = str(input("Type in the number(or J, Q, K) of card that you want to play: "))
-                
-                chosenCard, checkPlayCard = askForCard(handWithSameSuit, playCard, identifysuit, False)
-                if checkPlayCard != "match":
-                    print("Found no matched card \nTry Again!")
-    
+                print("Found no matched card \nTry Again!")
+
 
     else:
         chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn, isHeartPlayed, listOfBoard)

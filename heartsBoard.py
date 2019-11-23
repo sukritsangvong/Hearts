@@ -119,7 +119,7 @@ def drawSlotForCardsOnBoard(window, setup, cardsOnBoard, cardPlayed):
             nameColor = color_rgb(0, 0, 0)
             valueCoorX = 220 + 12
             valueCoorY = 195 + 17
-            suitCoorX = 220 + 25
+            suitCoorX = 220 + 27
             suitCoorY = 195 + 17
         
             for card in cardsOnBoard:
@@ -212,7 +212,7 @@ def slotForCardOnHand(window, turnHand):
     nameColor = color_rgb(0, 0, 0)
     valueCoorX = rememberFirstCornerX + 12
     valueCoorY = firstCornerY + 17
-    suitCoorX = rememberFirstCornerX + 25
+    suitCoorX = rememberFirstCornerX + 27
     suitCoorY = firstCornerY + 17
 
     for card in hand:
@@ -298,10 +298,10 @@ def score(window, score, numPlayer, setup):
     
     if setup:
     
-        score1 = Text(score1Coor, '00')
-        score2 = Text(score2Coor, '00')
-        score3 = Text(score3Coor, '00')
-        score4 = Text(score4Coor, '00')
+        score1 = Text(score1Coor, '0')
+        score2 = Text(score2Coor, '0')
+        score3 = Text(score3Coor, '0')
+        score4 = Text(score4Coor, '0')
         
         score1.setTextColor(scoreColor)
         score2.setTextColor(scoreColor)
