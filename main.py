@@ -71,15 +71,10 @@ def main():
 
         index2ofClubs = find2OfClubs(players)
 
-<<<<<<< HEAD
-        players, indexOfNextPlayer, isHeartPlayed = turn(players, index2ofClubs, True, False, window)
-
-=======
         players, indexOfNextPlayer, isHeartPlayed, clickZone = \
                  turn(players, index2ofClubs, True, \
                       False, window, clickZone)
         
->>>>>>> c3c32e00a73760544856e65ba79b0b75c834668e
         if index2ofClubs == 0:
             player0Hand = players[0].getHand()
             clickZone = slotForCardOnHand(window, player0Hand)
@@ -104,12 +99,9 @@ def main():
             scores.append(player.getScore())
         #generate new deck
         deck = createDeck()
-<<<<<<< HEAD
 
-        
-=======
         players = generatePlayers()
->>>>>>> c3c32e00a73760544856e65ba79b0b75c834668e
+
         #give new hands
         for player in players:
             assignHand(player,deck, 13)
