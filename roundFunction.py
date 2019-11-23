@@ -68,9 +68,8 @@ def cardSwap(players, handCount):
         direction = "across from"
     elif handCount == 4:
         return players
-    inputPrompt = "Choose 3 cards from your hand (by typing only the values " \
-                  "and the first letters of the suits of each card separated " \
-                  "by spaces) to give to the player " + direction + " you: "
+    inputPrompt = "Choose 3 cards from your hand (in format 'Ah 8s 10c')" \
+                  "to give to the player " + direction + " you: "
     for player in players:
         hand = player.getHand()
         hand = hand[0] + hand[1] + hand[2] + hand[3]
