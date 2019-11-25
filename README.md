@@ -3,7 +3,7 @@ Intro to CS project [Fall 2019 Carleton College]
 CS 111, DLN
 
 Run main.py
-
+*This program displays information in both the graphics window and the terminal*
 hearts --> click the cards to play them
 
 Rules:

@@ -61,7 +61,8 @@ def find2OfClubs(players):
         
 def cardSwap(players, handCount, clickZone, window):       
     '''Chooses three cards for the player to pass to another player
-    depending on which round it is.'''
+    depending on which round it is. The player's chosen cards are displayed
+    as a list in the terminal during the swap phase.'''
     if handCount == 1:
         direction = "to the left of"
     elif handCount == 2:
@@ -128,9 +129,6 @@ def updateScore(player):
             score += 1
         elif card == ['Q', 'spades']:
             score += 13
-    if score == 26:
-        score = 0
-        return "Shot the Moon"
     player.addScore(score)
     return player
     
