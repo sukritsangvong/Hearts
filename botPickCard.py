@@ -48,13 +48,13 @@ def botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstT
             
             for suit in turnHand[randomint:4]:
                 for card in suit:
-                    if card != []:
+                    if card != [] and card != ['Q', 'spades']:
                         return card
 
             if randomint != 0:
                 for suit in turnHand[:randomint]:
                     for card in suit:
-                        if card != []:
+                        if card != [] and card != ['Q', 'spades']:
                             return card
 
             #else:
