@@ -23,3 +23,5 @@ The Q - 13 points
 
 When anyone gets to 20 points (for this demo version), the game will end, and the player
 with the lowest score will win (unless there's a tie, in which case play will continue)
+
+Warning: running this program on another paltforms rather than MacOS might mess up the text size in the graohic window
