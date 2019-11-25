@@ -7,14 +7,16 @@ from heartsBoard import *
 import time
 
 def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone):
-    
-    #firstPlayer = function to determine the first player
+    '''Function to run each turn of Hearts.'''
+    #firstPlayer = index of the first player playing the turn
     firstPlayer = numOfStartPlayer
     listOfBoard = ['no card yet']
     
     turnLeft = 4
     addExtraTurn = 0
     
+    #on the first turn, only the 2 of clubs is allowed to play
+    #automatically play and remove from the player hand
     if firstTurn:
         players[firstPlayer].removeHand2Clubs()
         listOfBoard = [['2', 'clubs']]
@@ -28,20 +30,23 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone)
         
         turnPlayer = firstPlayer + i + addExtraTurn
         
+        #put the turnPlayer to a proper number(0,1,2,or 3)
+        #that coressponds witht he index of players list
         if turnPlayer > 3:
             turnPlayer = turnPlayer % 4
         
+        #show cards
         print('****')
         print('Cards on the Board:', listOfBoard)
         print('****')
 
-
+        #run playable function to determine the card palyed
         cardPlayed, handLeft, numPlayer = \
                     playable(players, turnPlayer, listOfBoard[0], \
                     firstTurn, isHeartPlayed, listOfBoard, clickZone, window)
 
 
-        
+        #put card played on the board list
         if listOfBoard[0] == 'no card yet':
             listOfBoard = [cardPlayed]
         else:
@@ -49,24 +54,26 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone)
 
         players[numPlayer].setHand(handLeft)
 
+        #redo the graphic for player0 hand
         if numPlayer == 0:
             player0Hand = players[0].getHand()
             clickZone = slotForCardOnHand(window, player0Hand)
         
-
+        #redo the graphic for card on board
         drawSlotForCardsOnBoard(window, False, listOfBoard, False)
         time.sleep(0.55)
 
-        
-            
-            
+    #check whether the heart is played
     for card in listOfBoard:
         if card[1] == 'hearts':
             isHeartPlayed = True
+
+    #print the list of board after the last player plays the card
     print('****')
     print('Cards on the Board:', listOfBoard)
     print('****')
 
+    #redraw an empty slot on the board
     time.sleep(0.50)
     drawSlotForCardsOnBoard(window, True, None, False)
     time.sleep(0.25)
@@ -76,6 +83,8 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone)
     indexOfNextPlayer = (numOfStartPlayer + indexFromStartPlayer) % 4
     players[indexOfNextPlayer].addGraveyard(listOfBoard)
 
+    #return list of player objects, index of the player starting next turn,
+    #boolean is heart played and clickZone for new axises on click
     return players, indexOfNextPlayer, isHeartPlayed, clickZone
 
 #TEST CODE  

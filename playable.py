@@ -6,6 +6,7 @@ from heartsBoard import *
 
 # might make this function to make code look a bit shorter later
 def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
+    '''Helper function to check whether the card palyed is in the cards on hand'''
 
     for checkCard in handWithSameSuit:
         
@@ -28,6 +29,7 @@ def askForCard(handWithSameSuit, playCard, suitOfPlayCard, suitOrNot):
 
 
 def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfBoard, clickZone, window):
+    '''Function to return the card played in each turn for each player'''
     #players = list of class of players
     #numPlayer = # of player that is currently playing (int)
     #identifyCard = card that the first player plays (list) ex. ['9', 'clubs']
@@ -43,17 +45,19 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
     noMatchingSuit = False
     identifysuit = ''
     
+    #if no card on board, can play anycard
     if identifyCard == 'no card yet':
         
         if isHeartPlayed:
             handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
             noMatchingSuit = True
+        #if heart is not played yet, can not play any hearts, but can still play Q of spades
         else:
             handWithSameSuit = turnHand[1] + turnHand[2] + turnHand[3]
             noMatchingSuit = True
 
-            
-
+    #check for suit of the card on board(identigysuit) and assign the cards with similar suits
+    #to the handWithSameSuit
     else:
         identifysuit = identifyCard[1]
     
@@ -76,6 +80,7 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
         if not firstTurn:
             handWithSameSuit = turnHand[0] + turnHand[1] + turnHand[2] + turnHand[3]
             noMatchingSuit = True
+        #hearts and Q of spades can not be discarded on the first round
         else:
             handWithSameSuit = turnHand[1] + turnHand[2] + turnHand[3]
             noMatchingSuit = True
@@ -86,6 +91,7 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
 
 
 #--------------------------------choose card to play part----------------------------
+    #if it is the user player
     if numPlayer == 0:
         
         print("---------------------------------------------------\n")
@@ -101,13 +107,16 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
         chosenCard = ''
 
         while checkPlayCard != "match":
+            #use function from heartBoard.py to identify the card played
             chosenCard = getCardName(selectCard(clickZone, window), turnHand)
+            
+            #check whether the chosesn card is playable
             if chosenCard in handWithSameSuit:
                 checkPlayCard = "match"
             else:
-                print("Found no matched card \nTry Again!")
+                print("Can not play this card. \nTry Again!")
 
-
+    #call function from potPickCard.py
     else:
         chosenCard = botPickCard(handWithSameSuit, noMatchingSuit, turnHand, identifyCard, firstTurn, isHeartPlayed, listOfBoard)
 
@@ -119,7 +128,7 @@ def playable(players, numPlayer, identifyCard, firstTurn, isHeartPlayed, listOfB
             listOfSuits.remove(chosenCard)
 
 
-
+    #return played card, card left on hand, and the index of players who played
     return chosenCard, turnHand, numPlayer
 
 

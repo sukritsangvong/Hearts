@@ -4,6 +4,7 @@ def calculateScore(listOfGraveyard):
     
     for card in listOfGraveyard:
         
+        #calculate score
         if card[1] == 'hearts':
             pointList += card
         if card[1] == 'spades' and card[0] == 'Q':
