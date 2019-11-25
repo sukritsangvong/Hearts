@@ -71,7 +71,8 @@ def cardSwap(players, handCount, clickZone, window):
     elif handCount == 0:
         return players
     inputPrompt = "Choose 3 cards from your hand " \
-                  "to give to the player " + direction + " you: "
+                  "to give to the player " + direction + " you: \n" \
+                  "(and click them again if you want to remove them)"
     for player in players:
         hand = player.getHand()
         if player == players[0]:    #get the card choices from the player
