@@ -66,6 +66,7 @@ def botSwap(hand):
         if values.index(card[0]) > 5 and card not in swapList \
             and len(swapList) < 3:
                 swapList.append(card)
+
     #Finally, the bot will discard its highest cards
     for card in orderedHand:
         handIndex = 0

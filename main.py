@@ -31,8 +31,8 @@ def main():
 
     Tie = False
     roundCount = 1
-    #The game continues as long as no one reaches a score of 100. If a player
-    #reaches 100 points but there is a tie for the lowest score, play continues
+    #The game continues as long as no one reaches a score of 20. If a player
+    #reaches 20 points but there is a tie for the lowest score, play continues
     while (players[0].getScore() < 20 and players[1].getScore() < 20 \
         and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie:
 
@@ -44,7 +44,8 @@ def main():
         print("-----------")
         print("Bot 3: ", players[3].getHand())
         print("-----------")
-        
+
+        #Initializing variables at the beginning of each round
         roundCount = roundCount % 4
 
         displayTextChooseCard(window, roundCount, False)
