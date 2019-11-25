@@ -6,6 +6,7 @@ from takeCardFromBoard import *
 
 
 def generatePlayers():
+    '''Makes a list containing the 4 player objects.'''
     players = []
     for i in range(4):
         players.append(player())
@@ -13,7 +14,8 @@ def generatePlayers():
         
     
 class player:
-
+    '''An object that has a hand, a score, and a graveyard. Can be controlled
+    by either a human or by code.'''
     def __init__(self):
         self.hand = []
         self.graveyard = []
@@ -25,9 +27,6 @@ class player:
     
     def getHand(self):
         return self.hand
-
-    def addToHand(self, card):
-        self.hand.append(card)
 
     def appendHand(self,card):
         self.hand.append(card)
@@ -62,38 +61,29 @@ class player:
     
 
 def createDeck():
- 
-    #create a deck
+    '''Creates a standard deck of 52 cards. Aces are high.'''
     deck = []
     for suits in ["clubs", "diamonds", "hearts", "spades"]:
         for num in ['2', '3','4', '5', '6', '7', '8', '9','10',\
                    'J', 'Q', 'K', 'A']:
             cardAdded = [num, suits]
-            #cardAdded = ' '.join(cardAdded)
             deck.append(cardAdded)
 
     return deck
 
-
-#This should be a player method
 def assignHand(player, deck, numberofCards):
-
-    #currentHand = self.getHand()
+    '''Deals a random hand of cards to the player.'''
     currentHand = player.getHand()
     
-    
-    for individualHands in range(numberofCards):
-        
+    for cards in range(numberofCards):
+
         #random one card at a time
         card = random.choice(deck)
 
         #remove chosen card from the deck
-        '''for identical in deck:
-            if identical == card:
-                deck.remove(identical)'''
         deck.remove(card)
 
-        #add cards to hand
+        #add card to hand
         currentHand.append(card)
         
     #return currentHand
@@ -101,72 +91,3 @@ def assignHand(player, deck, numberofCards):
     return player
 
       
-def main():
-    
-    #craete class of players
-    #p1 = players[1]
-    #p2 = players[2]
-    #p3 = players[3]
-    #p4 = players[4]
-    
-    #generate deck
-    deck = createDeck()
-
-    #generate players
-    players = generatePlayers()
-    print(players)
-
-    #hand out the starting cards --> mutate the list of cards
-    for i in range(4):
-        assignHand(players[i],deck, 13)
-    
-    '''#listHearts = []
-    #listClubs = []
-    #listSpades = []
-    #listDiamonds = []
-    #for eachCard in p1.getHand():
-
-        #if eachCard[5:] == 'hearts':
-            #listHearts.append(eachCard)
-
-        if eachCard[5:] == 'clubs':
-            listClubs.append(eachCard)
-
-        if eachCard[5:] == 'spades':
-            listSpades.append(eachCard)
-
-        if eachCard[5:] == 'diamonds':
-            listDiamonds.append(eachCard)
-
-    print(listHearts)'''
-
-    
-
-    
-    print("Player 1 : ", players[0].getHand())
-    print("-----------")
-    print("Player 2 : ", players[1].getHand())
-    print("-----------")
-    print("Player 3 : ", players[2].getHand())
-    print("-----------")
-    print("Player 4 : ", players[3].getHand())
-    print("-----------")
-    print("list of deck:", deck)
-
-def test():
-
-    #--------------------------------------------------------------from heartCard.py
-    deck = createDeck()
-    players = generatePlayers()
-    for player in players:
-        assignHand(player,deck, 13)
-        makeSortedHand(player)
-#--------------------------------------------------------------from heartCard.py
-    set = [[['5', 'hearts'], ['J', 'hearts']], [['2', 'clubs'], ['5', 'clubs'], ['9', 'clubs']], [['2', 'diamonds'], ['4', 'diamonds'], ['K', 'diamonds'], ['A', 'diamonds']], [['3', 'spades'], ['7', 'spades'], ['9', 'spades'], ['Q', 'spades']]]
-    players[0].setHand(set)
-    print("Player 1 : ", players[0].removeHand2Clubs())
-    print("Player 1 : ", players[0].getHand())
-
-if __name__ == "__main__":
-    test()
-
