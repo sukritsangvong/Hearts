@@ -1,14 +1,14 @@
 #roundFunction.py
-#contains functions to make both rounds and hands work
+#This module contains programs for sorting hands, swapping cards between hands,
+#finding which player has the 2 of Clubs, and updating the score after a trick
 
 from heartCard import *
 from botswap import *
 from heartsBoard import *
-
-#First, collect each suit into a distinct list   
+ 
 def sortSuits(hand, suit):
-    '''Helper function for makeSortedHand. Creates a list of all the cards
-        of a given suit that are in the hand'''
+    '''Helper function for makeSortedHand. Creates lists of all the cards
+        of each suit that are in the hand'''
     suitList = []
     for card in hand:
         if card[1][0] == suit[0]:
@@ -17,7 +17,7 @@ def sortSuits(hand, suit):
 
         
 def findMinCard(suitList, i):
-    '''Helper for sorting. Finds the smallest value card in a list of cards'''
+    '''Finds the smallest value card in a list of cards. Aces are high.'''
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 
               'J', 'Q', 'K', 'A']
     card = suitList[i]
@@ -37,8 +37,6 @@ def sortByMin(suitList):
     for i in range(len(suitList)):
         minCard = findMinCard(suitList, 0)
         orderedSuit.append(minCard)
-        #print(minCard)
-        #print(suitList)
         suitList.remove(minCard)
     return orderedSuit
 
@@ -48,8 +46,6 @@ def makeSortedHand(player):
     sortedHand = []
     for suit in ['h', 'c', 'd', 's']:
         suitList = sortSuits(hand, suit)
-        #print("---------SUITS----------")
-        #print(suitList)
         orderedSuit = sortByMin(suitList)
         sortedHand.append(orderedSuit)
     player.setHand(sortedHand)
@@ -64,8 +60,8 @@ def find2OfClubs(players):
                 return players.index(player)
         
 def cardSwap(players, handCount, clickZone, window):       
-    #Choose the cards that you want to pass to another player
-    #Doesn't swap any cards every 4th round
+    '''Chooses three cards for the player to pass to another player
+    depending on which round it is.'''
     if handCount == 1:
         direction = "to the left of"
     elif handCount == 2:
@@ -86,24 +82,10 @@ def cardSwap(players, handCount, clickZone, window):
                 if chosenCard not in swapList:
                     swapList.append(chosenCard)
                     print("Current swaps:", swapList)
-                else:
-                    print("Please pick a different card")
+                elif chosenCard in swapList:
+                    swapList.remove(chosenCard)
+                    print("Current swaps:", swapList)
             hand = hand[0] + hand[1] + hand[2] + hand[3]
-            '''while len(swapList) != 3 or swapList[0] not in hand or \
-                  swapList[1] not in hand or swapList[2] not in hand:
-                print("Current hand: ", hand)
-                swapList = input(inputPrompt).split(' ')
-                for i in range(len(swapList)):
-                    swap = swapList[i]
-                    if swap in swapList[:i] or swap in swapList[i+1:]:
-                        swapList = ['', '', '']
-                    for card in hand:
-                        if len(swap) == 3:    #if the card to be swapped is a 10
-                            if card[0] == '10' and card[1][0] == str(swap[2]):
-                                swapList[i] = card
-                        elif len(swap) == 2 and str(swap[0]) == card[0] \
-                                            and str(swap[1]) == card[1][0]:
-                            swapList[i] = card'''
         else:                       #get the card choices from the bots
             hand = hand[0] + hand[1] + hand[2] + hand[3]
             swapList = botSwap(hand)
@@ -136,8 +118,8 @@ def giveSwaps(players, handCount):
 
            
 def updateScore(player):
-    #This function will need to run at the end of every round,
-    #ie, every 4th turn starting on the 4th turn
+    '''Counts the cards in the player's graveyard and calculates their score
+    to be added.'''
     score = 0
     graveyard = player.getGraveyard()
     for card in graveyard:
@@ -145,13 +127,16 @@ def updateScore(player):
             score += 1
         elif card == ['Q', 'spades']:
             score += 13
+    if score == 26:
+        score = 0
+        return "Shot the Moon"
     player.addScore(score)
     return player
     
 
 
 #TEST CODE
-def main():
+'''def main():
     
     print("-----------------------")
     players = generatePlayers()
@@ -184,11 +169,8 @@ def main():
     print("Player 4 : ", players[3].getHand())
     print("-----------")
     
-    
-    
-
 if __name__ == "__main__":
-    main()
+    main()'''
 
 
 

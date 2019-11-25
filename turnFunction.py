@@ -1,4 +1,5 @@
-#turn turn
+#turnFunction.py
+#Runs a single turn of the game
 from heartCard import *
 from playable import *
 from takeCardFromBoard import *
@@ -35,8 +36,9 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone)
         print('****')
 
 
-        cardPlayed, handLeft, numPlayer = playable(players, turnPlayer, listOfBoard[0], \
-                                                   firstTurn, isHeartPlayed, listOfBoard, clickZone, window)
+        cardPlayed, handLeft, numPlayer = \
+                    playable(players, turnPlayer, listOfBoard[0], \
+                    firstTurn, isHeartPlayed, listOfBoard, clickZone, window)
 
 
         
@@ -75,17 +77,16 @@ def turn(players, numOfStartPlayer, firstTurn, isHeartPlayed, window, clickZone)
     players[indexOfNextPlayer].addGraveyard(listOfBoard)
 
     return players, indexOfNextPlayer, isHeartPlayed, clickZone
-    
-#Note: need to add graveyard list after identifing who is taking the cards
 
-def main():
-#--------------------------------------------------------------from heartCard.py
+#TEST CODE  
+'''def main():
+#------------------------------------------from heartCard.py
     deck = createDeck()
     players = generatePlayers()
     for player in players:
         assignHand(player,deck, 13)
         makeSortedHand(player)
-#--------------------------------------------------------------from heartCard.py
+#------------------------------------------from heartCard.py
     print("Player 1 : ", players[0].getHand())
     print("-----------")
     print("Player 2 : ", players[1].getHand())
@@ -106,5 +107,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()'''
 

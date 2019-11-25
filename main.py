@@ -1,3 +1,7 @@
+#Final project for CS 111 with DLN
+#PJ Sangvong and Ben Aoki-Sherwood
+#Hearts
+
 from heartCard import *
 from playable import *
 from turnFunction import *
@@ -9,51 +13,36 @@ from heartsBoard import *
 
       
 def main():
+    '''Runs the card game Hearts displayed in a graphics window.'''
+    input("Welcome to Hearts! Press ENTER to start.")
+
+    #Create the players and the starting deck
+    deck, players = createDeck(), generatePlayers()
     
-    #craete class of players
-    #p1 = players[1]
-    #p2 = players[2]
-    #p3 = players[3]
-    #p4 = players[4]
-    
-    #generate deck
-    deck = createDeck()
-
-    #generate players
-    players = generatePlayers()
-
-
-    #hand out the starting cards --> mutate the list of cards
+    #Deal the cards 
     for player in players:
         assignHand(player,deck, 13)
         makeSortedHand(player)
 
     window = setup()
     player0Hand = players[0].getHand()
-
     clickZone = slotForCardOnHand(window, player0Hand)
 
 
-    #test
-#    players[0].setHand([[['9', 'hearts']],[['2', 'clubs'],['A', 'clubs']],[], []])
-#    players[1].setHand([[['A', 'hearts'],['5', 'hearts'],['K', 'hearts']],[],[], []])
-#    players[2].setHand([[['2', 'hearts']],[['7', 'clubs'],['Q', 'clubs']],[], []])
-#    players[3].setHand([[['6', 'hearts']],[['8', 'clubs'],['J', 'clubs']],[], []])
     Tie = False
     roundCount = 1
+    #The game continues as long as no one reaches a score of 100. If a player
+    #reaches 100 points but there is a tie for the lowest score, play continues
     while (players[0].getScore() < 20 and players[1].getScore() < 20 \
         and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie:
 
-        
-        print((players[0].getScore() < 20 and players[1].getScore() < 20 \
-               and players[2].getScore() < 20 and players[3].getScore() < 20) or Tie)
-        print("Player 1 : ", players[0].getHand())
+        print("You: ", players[0].getHand())
         print("-----------")
-        print("Player 2 : ", players[1].getHand())
+        print("Bot 1: ", players[1].getHand())
         print("-----------")
-        print("Player 3 : ", players[2].getHand())
+        print("Bot 2: ", players[2].getHand())
         print("-----------")
-        print("Player 4 : ", players[3].getHand())
+        print("Bot 3: ", players[3].getHand())
         print("-----------")
         
         roundCount = roundCount % 4
@@ -61,27 +50,17 @@ def main():
         displayTextChooseCard(window, roundCount, False)
         
         cardSwap(players,roundCount, clickZone, window)
-
         giveSwaps(players,roundCount)
         
         displayTextChooseCard(window, roundCount, True)
-
-
         
         player0Hand = players[0].getHand()
+
         clickZone = slotForCardOnHand(window, player0Hand)
-        
-        '''print("Player 1 : ", players[0].getHand())
-        print("-----------")
-        print("Player 2 : ", players[1].getHand())
-        print("-----------")
-        print("Player 3 : ", players[2].getHand())
-        print("-----------")
-        print("Player 4 : ", players[3].getHand())
-        print("-----------")'''
 
         index2ofClubs = find2OfClubs(players)
-
+        #Updates the players and determines who will lead the next trick,
+        #as well as whether hearts have been broken yet or not
         players, indexOfNextPlayer, isHeartPlayed, clickZone = \
                  turn(players, index2ofClubs, True, \
                       False, window, clickZone)
@@ -105,6 +84,7 @@ def main():
             
             
             print("-x-x-x-x-x-x-x-x-x-x-x-x-x-x--x Turn Ended -x-x-x-x-x-x-x-x-x-x-x-x-x-x--x")
+
         scores = []
         for player in players:
             scores.append(player.getScore())
@@ -140,8 +120,12 @@ def main():
        
         player0Hand = players[0].getHand()
         clickZone = slotForCardOnHand(window, player0Hand)
-        
-    print("Game Over! Player", winningPlayerIndex + 1, "wins!")
+    winner = ''
+    if winningPlayerIndex == 0:
+        winner = "You win!"
+    else:
+        winner = "Bot " + str(winningPlayerIndex) + " wins!"
+    print("Game Over!", winner)
 
 if __name__ == "__main__":
     main()

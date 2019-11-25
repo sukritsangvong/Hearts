@@ -1,11 +1,11 @@
 #botSwap.py
 #bot decision network for picking cards to swap @ beginning of round
-#add
 
 from roundFunction import *
 from heartCard import *
 
 def orderHand(hand):
+    '''Sorts a hand by value, disregarding suit.'''
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     handOrderedByValue = []
     while len(hand) > 0:
@@ -20,6 +20,7 @@ def orderHand(hand):
     return handOrderedByValue
 
 def botSwap(hand):
+    '''Determines which three cards the computer player will give away.'''
     values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     hearts, clubs, diamonds, spades = [],[],[],[]
     swapList = []
@@ -45,6 +46,7 @@ def botSwap(hand):
                     swapList.append(suit[suitIndex])
                 suitIndex += 1
 
+    #Next, the bot will get rid of any high spades it has
     orderedHand = orderHand(hand)                
     if ['Q', 'spades'] in spades and len(swapList) < 3 and \
        ['Q', 'spades'] not in swapList:
@@ -59,11 +61,12 @@ def botSwap(hand):
             swapList.append(['K', 'spades'])
             orderedHand.remove(['K', 'spades'])
 
+    #Next, the bot will discard high hearts
     for card in hearts:
         if values.index(card[0]) > 5 and card not in swapList \
             and len(swapList) < 3:
                 swapList.append(card)
-
+    #Finally, the bot will discard its highest cards
     for card in orderedHand:
         handIndex = 0
         while len(swapList) < 3:
@@ -72,22 +75,3 @@ def botSwap(hand):
           
     return swapList
 
-def main():
-    players = generatePlayers()
-    deck = createDeck()
-    for player in players:
-        assignHand(player, deck, 13)
-        makeSortedHand(player)
-    hand = players[2].getHand()
-    hand = hand[0] + hand[1] + hand[2] + hand[3]
-    #print(hand)
-    #print("------------")
-    #print(botSwap(hand))
-    print(orderHand(hand))
-
-if __name__ == "__main__":
-    main()
-
-
-
-        
