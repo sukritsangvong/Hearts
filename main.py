@@ -13,7 +13,8 @@ from heartsBoard import *
 
       
 def main():
-    '''Runs the card game Hearts displayed in a graphics window.'''
+    '''Runs the card game Hearts, displayed in a graphics window (with some
+    information also in the terminal window).'''
     input("Welcome to Hearts! Press ENTER to start.")
 
     #Create the players and the starting deck
