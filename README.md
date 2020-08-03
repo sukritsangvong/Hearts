@@ -9,9 +9,9 @@ hearts --> click the cards to play them
 Rules:
 The player holding the 2 of clubs after the pass makes the opening lead. 
 
-Each player must follow suit if possible. If a player is void of the suit led, a card of any other suit may be discarded. 
+Each player must follows suit if possible. If a player is void of the suit led, a card of any other suit may be discarded. 
 
-However, if a player has no clubs when the first trick is led, a heart (or the Queen of Spades) cannot be discarded. 
+However, if a player has no clubs when the first trick is led, a heart (or the Queen of Spades) can be discarded. 
 
 The highest card of the suit led wins a trick and the winner of that trick leads next. There is no trump suit.
 
